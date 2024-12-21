@@ -1,0 +1,12 @@
+<div class="alert alert-danger">
+    {% if error_message %}
+        <p> {{ error_message }}<a href="{% url 'login' %}" > لاگ این  </a> کنید </p>
+    {% else %}
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <p>{{ error }}</p>
+
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+</div>

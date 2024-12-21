@@ -1,0 +1,142 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}
+    Register Account
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Register Account</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__links">
+                        <a href="./index.html">Home</a>
+                        <span>Checkout</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Checkout Section Begin -->
+{#    <section class="checkout spad">#}
+{#        <div class="container">#}
+{#            <div class="checkout__form">#}
+{#                <form action="#">#}
+{#                    <div class="row">#}
+{#                        <div class="col-lg-8 col-md-6">#}
+{#                            <h6 class="checkout__title">Create Your Account</h6>#}
+{#                            <div class="row">#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="checkout__input">#}
+{#                                        <p>Fist Name<span>*</span></p>#}
+{#                                        <input type="text">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="checkout__input">#}
+{#                                        <p>Last Name<span>*</span></p>#}
+{#                                        <input type="text">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="checkout__input">#}
+{#                                <p>Address<span>*</span></p>#}
+{#                                <input type="text" placeholder="Street Address" class="checkout__input__add">#}
+{#                            </div>#}
+{#                            <div class="row">#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="checkout__input">#}
+{#                                        <p>Password<span>*</span></p>#}
+{#                                        <input type="text">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="col-lg-6">#}
+{#                                    <div class="checkout__input">#}
+{#                                        <p>Repeat Password<span>*</span></p>#}
+{#                                        <input type="text">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="checkout__input__checkbox">#}
+{##}
+{#                            </div>#}
+{#                            <div class="checkout__input">#}
+{#                                <p>Email<span>*</span></p>#}
+{#                                <input type="text">#}
+{#                            </div>#}
+{#                            <button type="submit" class="site-btn">Create</button>#}
+{#                            <div class="checkout__input__checkbox">#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+    <!-- Checkout Section End -->
+
+
+        <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <form method="post" action="{% url  'register'%}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <h6 class="checkout__title">Create Your Account</h6>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>First Name<span>*</span></p>
+                                        {{ form.first_name }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Last Name<span>*</span></p>
+                                        {{ form.last_name }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Address<span>*</span></p>
+                                {{ form.address }}
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Password<span>*</span></p>
+                                        {{ form.password }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Repeat Password<span>*</span></p>
+                                        {{ form.repeat_password }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Email<span>*</span></p>
+                                {{ form.email }}
+                                {{ form.email.errors }}
+                            </div>
+                            <p>Already Have Account? <a href="{% url 'login' %}" class="custom-link">Login!</a></p>
+                            <button type="submit" class="site-btn">Create</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

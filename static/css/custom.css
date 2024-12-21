@@ -1,0 +1,72 @@
+/*.alert-success {*/
+/*    background-color: #e0f7fa; !* رنگ آبی ملایم *!*/
+/*    color: #00796b; !* رنگ متن *!*/
+/*    border: 1px solid #00796b; !* حاشیه‌ای هماهنگ *!*/
+/*    padding: 10px 20px; !* فاصله داخلی *!*/
+/*    border-radius: 10px; !* لبه‌های گرد *!*/
+/*    text-align: center; !* متن وسط چین *!*/
+/*    font-size: 14px; !* اندازه متن *!*/
+/*    width: fit-content; !* اندازه متناسب با متن *!*/
+/*    margin: 20px auto; !* فاصله و مرکزیت *!*/
+/*    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); !* سایه ظریف *!*/
+/*}*/
+/*.alert-success {*/
+/*  color: #4CAF50; !* رنگ سبز برای پیام موفقیت *!*/
+/*  font-weight: 600;*/
+/*  text-transform: uppercase;*/
+/*  border-bottom: 1px solid #e1e1e1;*/
+/*  padding-bottom: 10px;*/
+/*  margin-bottom: 20px;*/
+/*  background-color: #f1f8e9; !* پس‌زمینه روشن *!*/
+/*  padding: 10px 20px;*/
+/*  border-radius: 8px; !* گوشه‌های گرد *!*/
+/*  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); !* سایه ملایم *!*/
+/*}*/
+
+
+.overlay-message {
+    position: absolute;
+    top: 10px; /* فاصله از بالا */
+    right: 10px; /* فاصله از راست */
+    background-color: #e0f7fa;
+    color: #00796b;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    text-align: center;
+    width: fit-content;
+    z-index: 1000;
+}
+
+.alert-success-custom {
+    position: absolute;
+    top: 10px; /* فاصله از بالا */
+    right: 10px; /* فاصله از راست */
+    background-color: #e0f7fa;
+    color: #00796b;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    text-align: center;
+    width: fit-content;
+    z-index: 1000;
+}
+.custom-link {
+    color: #000; /* رنگ لینک در حالت عادی */
+    text-decoration: none; /* حذف خط زیر لینک */
+}
+
+.custom-link:hover {
+    color: #000; /* رنگ لینک هنگام هاور */
+    background-color: #f0f0f0; /* پس‌زمینه هنگام هاور (اختیاری) */
+    text-decoration: underline; /* خط زیر لینک هنگام هاور (اختیاری) */
+}
+.map-style {
+    height: 300px;
+    border: 0;
+    allowfullscreen: true; /* این ویژگی فقط در HTML اعمال می‌شود */
+    aria-hidden: false; /* این ویژگی فقط در HTML اعمال می‌شود */
+    tabindex: 0; /* این ویژگی فقط در HTML اعمال می‌شود */
+}

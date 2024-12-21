@@ -1,0 +1,75 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}
+    login
+{% endblock %}
+
+{% block content %}
+    {#    <section class="checkout spad">#}
+    {#        <div class="container">#}
+    {#            <div class="checkout__form">#}
+    {#                <form method="post" action="{% url  'login' %}">#}
+    {#                    {% csrf_token %}#}
+    {#                    <div class="row">#}
+    {#                        <div class="col-lg-8 col-md-6">#}
+    {#                            <h6 class="checkout__title">Login To your Account</h6>#}
+    {#                            <div class="row">#}
+    {#                                <div class="col-lg-6">#}
+    {#                                    <div class="checkout__input">#}
+    {#                                        <p>Email<span>*</span></p>#}
+    {#                                        {{ form.email }}#}
+    {#                                        {{ form.email.errors }}#}
+    {#                                    </div>#}
+    {#                                </div>#}
+    {#                                <div class="col-lg-6">#}
+    {#                                    <div class="checkout__input">#}
+    {#                                        <p>Password<span>*</span></p>#}
+    {#                                        {{ form.password }}#}
+    {##}
+    {#                                    </div>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {##}
+    {#                            <button type="submit" class="site-btn">Login</button>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </form>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </section>#}
+
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <form method="post" action="{% url  'login' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <h6 class="checkout__title">Login To your Account</h6>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Email<span>*</span></p>
+                                        {{ form.email }}
+                                        {{ form.email.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Password<span>*</span></p>
+                                        {{ form.password }}
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Don't have an account? <a href="{% url 'register' %}" class="custom-link">Create!</a></p>
+                            <button type="submit" class="site-btn">Login</button>
+                            <div class="checkout__input">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

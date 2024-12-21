@@ -1,0 +1,81 @@
+<header class="header">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header__top__inner">
+                        <div class="header__top__left">
+                            <ul>
+                                {#                                    <li>USD <span class="arrow_carrot-down"></span>#}
+                                {#                                        <ul>#}
+                                {#                                            <li>EUR</li>#}
+                                {#                                            <li>USD</li>#}
+                                {#                                        </ul>#}
+                                {#                                    </li>#}
+                                {#                                    <li>ENG <span class="arrow_carrot-down"></span>#}
+                                {#                                        <ul>#}
+                                {#                                            <li>Spanish</li>#}
+                                {#                                            <li>ENG</li>#}
+                                {#                                        </ul>#}
+                                {#                                    </li>#}
+                                {% if request.user.is_authenticated %}
+                                    <li><a href="{% url 'logout' %}">log Out</a></li>
+                                    <li><a href="#">Profile</a></li>
+                                    {% if request.user.is_superuser %}
+                                    <li><a href="/admin">Admin</a></li>
+                                    {% endif %} 
+                                {% else %}
+                                    <li><a href="{% url 'register' %}">Register</a></li>
+                                    <li><a href="{% url 'login' %}">login</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="header__logo">
+                            <a href="{% url 'home' %}"><img src="{{ settings.site_logo.url }}" alt=""></a>
+                        </div>
+                        <div class="header__top__right">
+                            <div class="header__top__right__links">
+                                <a href="#" class="search-switch"><img src="/static/img/icon/search.png" alt=""></a>
+                                <a href="#"><img src="/static/img/icon/heart.png" alt=""></a>
+                            </div>
+                            <div class="header__top__right__cart">
+                                <a href="#"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
+                                <div class="cart__price">Cart: <span>$0.00</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <nav class="header__menu mobile-menu">
+                    <ul>
+                        <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><a
+                                href="{% url 'home' %}">Home</a></li>
+                        <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}"><a
+                                href="{% url 'about' %}">About</a></li>
+                        <li class="{% if request.resolver_match.url_name == 'product-list' %}active{% endif %}"><a
+                                href="{% url 'product-list' %}">Shop</a></li>
+                        <li><a href="#">Pages</a>
+                            <ul class="dropdown">
+                                <li><a href="./shop-details.html">Shop Details</a></li>
+                                <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                                <li><a href="./checkout.html">Check Out</a></li>
+                                <li><a href="./wisslist.html">Wisslist</a></li>
+                                <li><a href="./Class.html">Class</a></li>
+                                <li><a href="./blog-details.html">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="./blog.html">Blog</a></li>
+                        {#                            <li><a href="./contact.html">Contact</a></li>#}
+                        <li class="{% if request.resolver_match.url_name == 'contact-us' %}active{% endif %}"><a href="{% url 'contact-us' %}">تماس با ما</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

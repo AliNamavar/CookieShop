@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پاسخ به تیکت شما</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007BFF;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .content {
+            padding: 20px;
+            color: #333333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .content p {
+            margin: 10px 0;
+        }
+        .user-message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007BFF;
+            margin-top: 20px;
+        }
+        .response {
+            font-size: 16px;
+            margin-top: 20px;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .footer {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+            color: #666666;
+            font-size: 12px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            پاسخ به تیکت شما
+        </div>
+        <div class="content">
+            <p>سلام {{ name }},</p>
+            <p>با تشکر از شما برای ارسال تیکت. در زیر پیام شما و پاسخ ادمین آمده است:</p>
+            
+            <div class="user-message">
+                <p><strong>پیام شما:</strong></p>
+                <p>{{ ticket }}</p>
+            </div>
+            
+            <div class="response">
+                <p><strong>پاسخ ادمین:</strong></p>
+                <p>{{ response }}</p>
+            </div>
+
+            <p>اگر سوال دیگری دارید، خوشحال می‌شویم که کمک کنیم.</p>
+            <p>با احترام،</p>
+            <p>تیم پشتیبانی</p>
+        </div>
+        <div class="footer">
+            © 2024 Rana Bread. All rights reserved.
+        </div>
+    </div>
+
+</body>
+</html>
