@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'site_module',
     'account_module',
     'polls',
-    'contact_us_module'
+    'contact_us_module',
+    'article_module'
 ]
 
 MIDDLEWARE = [
