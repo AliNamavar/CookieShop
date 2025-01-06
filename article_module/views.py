@@ -101,3 +101,4 @@ class ArticleDetailView(DetailView):
             })
 
             return HttpResponse(response_html)
+#test
