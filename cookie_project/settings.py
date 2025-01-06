@@ -148,3 +148,6 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
 
 
 LOGIN_URL = '/login'
+
+SANDBOX = False
+MERCHANT = "XXXX-XXX-XXXX-XXX"

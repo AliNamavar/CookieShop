@@ -1,20 +1,78 @@
-from email.contentmanager import raw_data_manager
-
+import json
+import requests
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
-from django.views.generic import View
-
 from order_module.models import Order, OrderDetail
 from product_module.models import Product
-from django.utils.decorators import method_decorator
+from .models import Order
 
-# Create your views here.
-# method_decorator(login_required, name='dispatch')
-# class test_view(View):
-#     def get(self, request):
-#         pass
+# ? sandbox merchant
+if settings.SANDBOX:
+    sandbox = 'sandbox'
+else:
+    sandbox = 'www'
+
+ZP_API_REQUEST = f"https://{sandbox}.zarinpal.com/pg/rest/WebGate/PaymentRequest.json"
+ZP_API_VERIFY = f"https://{sandbox}.zarinpal.com/pg/rest/WebGate/PaymentVerification.json"
+ZP_API_STARTPAY = f"https://{sandbox}.zarinpal.com/pg/StartPay/"
+
+# amount = 1000
+description = "نهایی کردنه خرید شما"  # Required
+# phone = 'YOUR_PHONE_NUMBER'  # Optional
+CallbackURL = 'http://127.0.0.1:8080/verify-payment/'
+
+
+def request_payment(request):
+    data = {
+        "MerchantID": settings.MERCHANT,
+        "Amount": Order.calculate_total,
+        "Description": description,
+        # "Phone": phone,
+        "CallbackURL": CallbackURL,
+    }
+    data = json.dumps(data)
+    # set content length by data
+    headers = {'content-type': 'application/json', 'content-length': str(len(data))}
+    try:
+        response = requests.post(ZP_API_REQUEST, data=data, headers=headers, timeout=10)
+
+        if response.status_code == 200:
+            response = response.json()
+            if response['Status'] == 100:
+                return {'status': True, 'url': ZP_API_STARTPAY + str(response['Authority']),
+                        'authority': response['Authority']}
+            else:
+                return {'status': False, 'code': str(response['Status'])}
+        return response
+
+    except requests.exceptions.Timeout:
+        return {'status': False, 'code': 'timeout'}
+    except requests.exceptions.ConnectionError:
+        return {'status': False, 'code': 'connection error'}
+
+
+def verify_payment(authority):
+    data = {
+        "MerchantID": settings.MERCHANT,
+        "Amount": Order.calculate_total,
+        "Authority": authority,
+    }
+    data = json.dumps(data)
+    # set content length by data
+    headers = {'content-type': 'application/json', 'content-length': str(len(data))}
+    response = requests.post(ZP_API_VERIFY, data=data, headers=headers)
+
+    if response.status_code == 200:
+        response = response.json()
+        if response['Status'] == 100:
+            return {'status': True, 'RefID': response['RefID']}
+        else:
+            return {'status': False, 'code': str(response['Status'])}
+    return response
+
 
 
 def add_to_cart(request):
@@ -112,6 +170,10 @@ def remove_order_detail(request):
         'body': render_to_string('cart_partials/cart_list_partials.html', context)
     })
 
+# method_decorator(login_required, name='dispatch')
+# class test_view(View):
+#     def get(self, request):
+#         pass
 
 @login_required
 def update_cart_product_count(request):
