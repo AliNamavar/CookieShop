@@ -39,7 +39,7 @@ class ConfirmContactFormView(View):
             )
             newContact.save()
 
-            response_html = render_to_string("partials/feedback_success.html", {
+            response_html = render_to_string("contact_us_partials/success_article_comments.html", {
                 "success_message": "نظر شما با موفقیت ثبت شد."
             }).strip()
             return HttpResponse(response_html)
