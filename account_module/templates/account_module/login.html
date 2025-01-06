@@ -5,39 +5,22 @@
 {% endblock %}
 
 {% block content %}
-    {#    <section class="checkout spad">#}
-    {#        <div class="container">#}
-    {#            <div class="checkout__form">#}
-    {#                <form method="post" action="{% url  'login' %}">#}
-    {#                    {% csrf_token %}#}
-    {#                    <div class="row">#}
-    {#                        <div class="col-lg-8 col-md-6">#}
-    {#                            <h6 class="checkout__title">Login To your Account</h6>#}
-    {#                            <div class="row">#}
-    {#                                <div class="col-lg-6">#}
-    {#                                    <div class="checkout__input">#}
-    {#                                        <p>Email<span>*</span></p>#}
-    {#                                        {{ form.email }}#}
-    {#                                        {{ form.email.errors }}#}
-    {#                                    </div>#}
-    {#                                </div>#}
-    {#                                <div class="col-lg-6">#}
-    {#                                    <div class="checkout__input">#}
-    {#                                        <p>Password<span>*</span></p>#}
-    {#                                        {{ form.password }}#}
-    {##}
-    {#                                    </div>#}
-    {#                                </div>#}
-    {#                            </div>#}
-    {##}
-    {#                            <button type="submit" class="site-btn">Login</button>#}
-    {#                        </div>#}
-    {#                    </div>#}
-    {#                </form>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    </section>#}
-
+    {% if messages %}
+        <div id="message-box" class="alert alert-success-custom overlay-message">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        <script>
+            // مخفی کردن پیام بعد از 3 ثانیه
+            setTimeout(function () {
+                var messageBox = document.getElementById('message-box');
+                if (messageBox) {
+                    messageBox.style.display = 'none';
+                }
+            }, 3000); // زمان بر حسب میلی‌ثانیه
+        </script>
+    {% endif %}
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">

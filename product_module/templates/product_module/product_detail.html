@@ -1,11 +1,12 @@
 {% extends 'shared/layout.html' %}
+{% load thumbnail %}
 
 {% block title %}
-	Product | Detail
+    محصولات | {{ products.title }}
 {% endblock %}
 
 {% block content %}
-	<!-- Breadcrumb Begin -->
+    <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -16,9 +17,9 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="breadcrumb__links">
-                        <a href="./index.html">Home</a>
-                        <a href="./shop.html">Shop</a>
-                        <span>Sweet autumn leaves</span>
+                        <a href=".{% url 'home' %}">Home</a>
+                        <a href="{% url 'product-list' %}">Shop</a>
+                        <span>{{ products.title }}</span>
                     </div>
                 </div>
             </div>
@@ -36,48 +37,56 @@
                             <img class="big_img" src="{{ products.image.url }}" alt="">
                         </div>
                         <div class="product__details__thumb">
-                            <div class="pt__item active">
-                                <img data-imgbigurl="{{ products.image.url }}"
-                                src="{{ products.image.url }}" alt="">
-                            </div>
-                            <div class="pt__item">
-                                <img data-imgbigurl="{{ products.image.url }}"
-                                src="{{ products.image.url }}" alt="">
-                            </div>
-                            <div class="pt__item">
-                                <img data-imgbigurl="{{ products.image.url }}"
-                                src="{{ products.image.url }}" alt="">
-                            </div>
-                            <div class="pt__item">
-                                <img data-imgbigurl="/static/img/shop/details/product-big-3.jpg"
-                                src="/static/img/shop/details/product-big-3.jpg" alt="">
-                            </div>
-{#                            <div class="pt__item">#}
-{#                                <img data-imgbigurl="/static/img/shop/details/product-big-5.jpg"#}
-{#                                src="/static/img/shop/details/product-big-5.jpg" alt="">#}
-{#                            </div>#}
+                            {% for gallery in product_gallery %}
+                                <div class="pt__item">
+                                    <img class="iamge-control-size-product" data-imgbigurl="{{ gallery.image.url }}"
+                                         src="{{ gallery.image.url }}" alt="">
+                                </div>
+
+                            {% endfor %}
+
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="product__details__text">
                         <div class="product__label">{{ products.title }}</div>
-                        <h4>SWEET AUTUMN LEAVES</h4>
-                        <h5>$26.41</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida</p>
+                        <h4>{{ products.url_title }}</h4>
+                        <h5>${{ products.price }}</h5>
+                        <p>{{ products.short_description }}</p>
                         <ul>
-                            <li>SKU: <span>17</span></li>
-                            <li>Category: <span>Biscuit cake</span></li>
-                            <li>Tags: <span>Gadgets, minimalisstic</span></li>
+                            <li>MIN: <span>17</span></li>
+                            {#                            <li> حداقل میزان خرید: <span>هفده</span></li>#}
+                            {#                            <li>Category: <span>{{ products.category.title }}</span></li>#}
+                            <li>Category:
+                                <span>
+                                    {% for category in products.category.all %}
+                                        {{ category.title }}{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </span>
+                            </li>
+
+                            {#                            <li>Tags: <span>Gadgets, minimalisstic</span></li>#}
                         </ul>
                         <div class="product__details__option">
+                            {#                            <div class="quantity">#}
+                            {#                                <div class="pro-qty">#}
+                            {#                                    <input type="text" value="{{ products.number }}" min="{{ products.number }}"#}
+                            {#                                           id="product-count">#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {#                            <input type="hidden" value="{{ products.number }}" id="min_value_count">#}
+
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="2">
+                                    <input type="text" value="{{ products.number }}"
+                                           id="pro_qty_{{ products.id }}">
                                 </div>
                             </div>
-                            <a href="#" class="primary-btn">Add to cart</a>
+                            <input type="hidden" value="{{ products.number }}" id="min_value_count_{{ products.id }}">
+
+
+                            <a onclick="addProductToCart({{ products.id }})" class="primary-btn">Add to cart</a>
                             <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
                         </div>
                     </div>
@@ -89,46 +98,43 @@
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Additional information</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Previews(1)</a>
-                        </li>
+                        {#                        <li class="nav-item">#}
+                        {#                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Additional information</a>#}
+                        {#                        </li>#}
+                        {#                        <li class="nav-item">#}
+                        {#                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Previews(1)</a>#}
+                        {#                        </li>#}
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="row d-flex justify-content-center">
                                 <div class="col-lg-8">
-                                    <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet and
-                                        tasty chunks of delicious strawberries. Made with the freshest ingredients, one
-                                        bite will send you to summertime. Each gift arrives in an elegant gift box and
-                                    arrives with a greeting card of your choice that you can personalize online!</p>
+                                    <p>{{ products.description }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="tabs-2" role="tabpanel">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-8">
-                                    <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet and
-                                        tasty chunks of delicious strawberries. Made with the freshest ingredients, one
-                                        bite will send you to summertime. Each gift arrives in an elegant gift box and
-                                        arrives with a greeting card of your choice that you can personalize online!2
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="tabs-3" role="tabpanel">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-8">
-                                    <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet and
-                                        tasty chunks of delicious strawberries. Made with the freshest ingredients, one
-                                        bite will send you to summertime. Each gift arrives in an elegant gift box and
-                                        arrives with a greeting card of your choice that you can personalize online!3
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        {#                        <div class="tab-pane" id="tabs-2" role="tabpanel">#}
+                        {#                            <div class="row d-flex justify-content-center">#}
+                        {#                                <div class="col-lg-8">#}
+                        {#                                    <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet and#}
+                        {#                                        tasty chunks of delicious strawberries. Made with the freshest ingredients, one#}
+                        {#                                        bite will send you to summertime. Each gift arrives in an elegant gift box and#}
+                        {#                                        arrives with a greeting card of your choice that you can personalize online!2#}
+                        {#                                    </p>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="tab-pane" id="tabs-3" role="tabpanel">#}
+                        {#                            <div class="row d-flex justify-content-center">#}
+                        {#                                <div class="col-lg-8">#}
+                        {#                                    <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet and#}
+                        {#                                        tasty chunks of delicious strawberries. Made with the freshest ingredients, one#}
+                        {#                                        bite will send you to summertime. Each gift arrives in an elegant gift box and#}
+                        {#                                        arrives with a greeting card of your choice that you can personalize online!3#}
+                        {#                                    </p>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
                     </div>
                 </div>
             </div>
@@ -138,115 +144,45 @@
 
     <!-- Related Products Section Begin -->
     <section class="related-products spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="section-title">
-                        <h2>Related Products</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="related__products__slider owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-1.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Dozen Cupcakes</a></h6>
-                                <div class="product__item__price">$32.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-2.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Cookies and Cream</a></h6>
-                                <div class="product__item__price">$30.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-3.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Gluten Free Mini Dozen</a></h6>
-                                <div class="product__item__price">$31.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-4.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Cookie Dough</a></h6>
-                                <div class="product__item__price">$25.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-5.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Vanilla Salted Caramel</a></h6>
-                                <div class="product__item__price">$05.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-6.jpg">
-                                <div class="product__label">
-                                    <span>Cupcake</span>
-                                </div>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">German Chocolate</a></h6>
-                                <div class="product__item__price">$14.00</div>
-                                <div class="cart_add">
-                                    <a href="#">Add to cart</a>
-                                </div>
-                            </div>
+        {% if related_products %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="section-title">
+                            <h2>Related Products</h2>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="related__products__slider owl-carousel">
+                        {% for related in related_products %}
+                            <div class="col-lg-3">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ related.image.url }}">
+                                        <div class="product__label">
+                                            <span>{{ related.title }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="#">{{ related.short_description }}</a></h6>
+                                        <div class="product__item__price">${{ related.price }}</div>
+                                        <div class="cart_add">
+                                            <a href="#">Add to cart</a>
+                                            <a href="{% url 'product-detail' slug=related.slug %}">See Detail</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
             </div>
-        </div>
+
+        {% endif %}
+
     </section>
     <!-- Related Products Section End -->
 {% endblock %}

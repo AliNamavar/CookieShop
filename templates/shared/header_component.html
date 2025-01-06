@@ -20,7 +20,7 @@
                                 {#                                    </li>#}
                                 {% if request.user.is_authenticated %}
                                     <li><a href="{% url 'logout' %}">log Out</a></li>
-                                    <li><a href="#">Profile</a></li>
+{#                                    <li><a href="#">Profile</a></li>#}
                                     {% if request.user.is_superuser %}
                                     <li><a href="/admin">Admin</a></li>
                                     {% endif %} 
@@ -34,13 +34,15 @@
                             <a href="{% url 'home' %}"><img src="{{ settings.site_logo.url }}" alt=""></a>
                         </div>
                         <div class="header__top__right">
-                            <div class="header__top__right__links">
-                                <a href="#" class="search-switch"><img src="/static/img/icon/search.png" alt=""></a>
-                                <a href="#"><img src="/static/img/icon/heart.png" alt=""></a>
-                            </div>
+{#                            <div class="header__top__right__links">#}
+{#                                <a href="#" class="search-switch"><img src="/static/img/icon/search.png" alt=""></a>#}
+{#                                <a href="#"><img src="/static/img/icon/heart.png" alt=""></a>#}
+{#                            </div>#}
                             <div class="header__top__right__cart">
-                                <a href="#"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
-                                <div class="cart__price">Cart: <span>$0.00</span></div>
+{#                                {% if request.user.is_authenticated %}#}
+                                <a href="{% url 'cart_detail' %}"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
+                                <div class="cart__price">Cart: <span>${{ total_price }}</span></div>
+{#                                {% endif %}#}
                             </div>
                         </div>
                     </div>

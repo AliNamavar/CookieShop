@@ -22,7 +22,6 @@ class RegisterView(View):
     def post(self, request):
         form = RegisterForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
             user_first_name = form.cleaned_data.get('first_name')
             user_last_name = form.cleaned_data.get('last_name')
             user_address = form.cleaned_data.get('address')
@@ -97,7 +96,7 @@ class logoutView(View):
     def get(self, request):
         logout(request)
         messages.success(request, 'با موفقیت خارج شدید')
-        return redirect(reverse('home'))
+        return redirect(reverse('login'))
 
 
 class LoginView(View):

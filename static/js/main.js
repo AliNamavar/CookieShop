@@ -205,31 +205,55 @@
     /*-------------------
 		Quantity change
 	--------------------- */
-    var proQty = $('.pro-qty');
-    proQty.prepend('<span class="dec qtybtn">-</span>');
-    proQty.append('<span class="inc qtybtn">+</span>');
-    proQty.on('click', '.qtybtn', function () {
-        var $button = $(this);
-        var oldValue = $button.parent().find('input').val();
-        if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            // Don't allow decrementing below zero
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
-        }
-        $button.parent().find('input').val(newVal);
-    });
 
-    
+    // var proQty = $('.pro-qty');
+    // const min_value_count = parseFloat($('#min_value_count').val());
+    // proQty.prepend('<span class="dec qtybtn">-</span>');
+    // proQty.append('<span class="inc qtybtn">+</span>');
+    // proQty.on('click', '.qtybtn', function () {
+    //     var $button = $(this);
+    //     var oldValue = parseFloat($button.parent().find('input').val());
+    //     var newVal;
+    //     if ($button.hasClass('inc')) {
+    //         newVal = oldValue + 1;
+    //     } else {
+    //         // Don't allow decrementing below the minimum value
+    //         newVal = oldValue > min_value_count ? oldValue - 1 : min_value_count;
+    //     }
+    //     $button.parent().find('input').val(newVal);
+    // });
+    // $('.pro-qty').each(function () {
+    //     var $this = $(this);
+    //     var productId = $this.find('input').attr('id').split('_')[2];
+    //     var min_value_count = parseFloat($('#min_value_count_' + productId).val());
+    //
+    //     $this.prepend('<span class="dec qtybtn">-</span>');
+    //     $this.append('<span class="inc qtybtn">+</span>');
+    //
+    //     $this.on('click', '.qtybtn', function () {
+    //         var $button = $(this);
+    //         var oldValue = parseFloat($button.parent().find('input').val());
+    //         var newVal;
+    //         if ($button.hasClass('inc')) {
+    //             newVal = oldValue + 1;
+    //         } else {
+    //             // Don't allow decrementing below the minimum value
+    //             newVal = oldValue > min_value_count ? oldValue - 1 : min_value_count;
+    //         }
+    //         $button.parent().find('input').val(newVal);
+    //     });
+    // });
+
 
     $(".product__details__thumb").niceScroll({
         cursorborder: "",
         cursorcolor: "rgba(0, 0, 0, 0.5)",
         boxzoom: false
-      });
+    });
+
+
+
+
+
 
 })(jQuery);

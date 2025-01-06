@@ -1,4 +1,5 @@
 {% extends 'shared/layout.html' %}
+{% load thumbnail %}
 {% load custom_filters %}
 {% block title %}
     صفحه ی اصلی
@@ -95,43 +96,19 @@
     <div class="categories">
         <div class="container">
             <div class="row">
+
                 <div class="categories__slider owl-carousel">
-                    <div class="categories__item">
-                        <div class="categories__item__icon">
-                            <span class="flaticon-029-cupcake-3"></span>
-                            <h5>Cupcake</h5>
+                    {% for category in categories %}
+                        <div class="categories__item">
+                            <div class="categories__item__icon">
+                                <span class="{{ category.icon }}"></span>
+                                <a href="{% url 'product-list' %}?category={{ category.url }}">
+                                    <h5>{{ category.title }}</h5>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="categories__item">
-                        <div class="categories__item__icon">
-                            <span class="flaticon-034-chocolate-roll"></span>
-                            <h5>Butter</h5>
-                        </div>
-                    </div>
-                    <div class="categories__item">
-                        <div class="categories__item__icon">
-                            <span class="flaticon-005-pancake"></span>
-                            <h5>Red Velvet</h5>
-                        </div>
-                    </div>
-                    <div class="categories__item">
-                        <div class="categories__item__icon">
-                            <span class="flaticon-030-cupcake-2"></span>
-                            <h5>Biscuit</h5>
-                        </div>
-                    </div>
-                    <div class="categories__item">
-                        <div class="categories__item__icon">
-                            <span class="flaticon-006-macarons"></span>
-                            <h5>Donut</h5>
-                        </div>
-                    </div>
-                    <div class="categories__item">
-                        <div class="categories__item__icon">
-                            <span class="flaticon-006-macarons"></span>
-                            <h5>Cupcake</h5>
-                        </div>
-                    </div>
+                    {% endfor %}
+
                 </div>
             </div>
         </div>
@@ -142,139 +119,31 @@
     <section class="product spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-1.jpg">
-                            <div class="product__label">
-                                <span>Cupcake</span>
+                {% for product in products %}
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" data-setbg="{{ product.image.url }}">
+                                <div class="product__label">
+                                    <span>{{ product.title }}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Dozen Cupcakes</a></h6>
-                            <div class="product__item__price">$32.00</div>
-                            <div class="cart_add">
-                                <a href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-2.jpg">
-                            <div class="product__label">
-                                <span>Cupcake</span>
-                            </div>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Cookies and Cream</a></h6>
-                            <div class="product__item__price">$30.00</div>
-                            <div class="cart_add">
-                                <a href="#">Add to cart</a>
+                            <div class="product__item__text">
+                                <h6><a href="#">{{ product.short_description }}</a></h6>
+                                <div class="product__item__price">${{ product.price }}</div>
+                                <div class="cart_add">
+                                    <a href="#">Add to cart</a>&nbsp;
+                                    <a href="{% url 'product-detail' slug=product.slug %}">See Detail</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-3.jpg">
-                            <div class="product__label">
-                                <span>Cupcake</span>
-                            </div>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Gluten Free Mini Dozen</a></h6>
-                            <div class="product__item__price">$31.00</div>
-                            <div class="cart_add">
-                                <a href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-4.jpg">
-                            <div class="product__label">
-                                <span>Cupcake</span>
-                            </div>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Cookie Dough</a></h6>
-                            <div class="product__item__price">$25.00</div>
-                            <div class="cart_add">
-                                <a href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-5.jpg">
-                            <div class="product__label">
-                                <span>Cupcake</span>
-                            </div>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Vanilla Salted Caramel</a></h6>
-                            <div class="product__item__price">$05.00</div>
-                            <div class="cart_add">
-                                <a href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-6.jpg">
-                            <div class="product__label">
-                                <span>Cupcake</span>
-                            </div>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">German Chocolate</a></h6>
-                            <div class="product__item__price">$14.00</div>
-                            <div class="cart_add">
-                                <a href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-7.jpg">
-                            <div class="product__label">
-                                <span>Cupcake</span>
-                            </div>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Dulce De Leche</a></h6>
-                            <div class="product__item__price">$32.00</div>
-                            <div class="cart_add">
-                                <a href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="/static/img/shop/product-8.jpg">
-                            <div class="product__label">
-                                <span>Cupcake</span>
-                            </div>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Mississippi Mud</a></h6>
-                            <div class="product__item__price">$08.00</div>
-                            <div class="cart_add">
-                                <a href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                {% endfor %}
+
             </div>
         </div>
     </section>
     <!-- Product Section End -->
-
     <!-- Class Section Begin -->
     <section class="class spad">
         <div class="container">
@@ -286,15 +155,13 @@
                             <h2>say your opinion<br/></h2>
                         </div>
                         <div id="feedback-container">
-                            <form method="post" hx-post="{% url 'submit_feedback_form' %}"
-                                  hx-target="#new-location" hx-swap="innerHTML">
+                            <form id="feedbackForm" method="post" action="{% url 'submit_feedback_form' %}">
                                 {% csrf_token %}
                                 {{ form.text.label_tag }}
                                 {{ form.text }}
                                 {{ form.rating.label_tag }}
                                 {{ form.rating }}
-                                <div id="new-location"></div>
-
+{#                                <div id="new-location"></div>#}
                                 <button type="submit" class="site-btn">ارسال</button>
                             </form>
                         </div>
@@ -303,13 +170,11 @@
                 </div>
             </div>
             <div class="class__video set-bg" data-setbg="/static/img/cakeAI2.png">
-                {#                            <a href="https://www.youtube.com/watch?v=8PJ3_p7VqHw&list=RD8PJ3_p7VqHw&start_radio=1"#}
-                {#                            <a href="https://www.instagram.com/r.namavar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="#}
-                {#                               class="play-btn video-popup"><i class="fa fa-play"></i></a>#}
             </div>
         </div>
     </section>
 
+    <div id="form_input_home">
 
     <section class="testimonial spad">
         <div class="container">
@@ -358,7 +223,7 @@
         </div>
     </section>
     <!-- Testimonial Section End -->
-
+    </div>
     <!-- Instagram Section Begin -->
     <section class="instagram spad">
         <div class="container">
@@ -369,39 +234,46 @@
                             <span>Follow us on instagram</span>
                             <h2>Sweet moments are saved as memories.</h2>
                         </div>
-                        <h5><i class="fa fa-instagram"></i> @sweetcake</h5>
+                        <h5>
+                            <i class="fa fa-instagram"></i>
+                            <a class="instagram-link"
+                               href="https://www.instagram.com/r.namavar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                                @r.namavar
+                            </a>
+                        </h5>
+
                     </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-6">
                             <div class="instagram__pic">
-                                <img src="/static/img/instagram/instagram-1.jpg" alt="">
+                                <img src="{{ gallery.image.url }}" alt="">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-6">
                             <div class="instagram__pic middle__pic">
-                                <img src="/static/img/instagram/instagram-2.jpg" alt="">
+                                <img src="{{ gallery.image_two.url }}" alt="">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-6">
                             <div class="instagram__pic">
-                                <img src="/static/img/instagram/instagram-3.jpg" alt="">
+                                <img src="{{ gallery.image_tree.url }}" alt="">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-6">
                             <div class="instagram__pic">
-                                <img src="/static/img/instagram/instagram-4.jpg" alt="">
+                                <img src="{{ gallery.image_four.url }}" alt="">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-6">
                             <div class="instagram__pic middle__pic">
-                                <img src="/static/img/instagram/instagram-5.jpg" alt="">
+                                <img src="{{ gallery.image_five.url }}" alt="">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-6">
                             <div class="instagram__pic">
-                                <img src="/static/img/instagram/instagram-3.jpg" alt="">
+                                <img src="{{ gallery.image_six.url }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -434,4 +306,6 @@
         </div>
     </div>
     <!-- Map End -->
+
+
 {% endblock %}

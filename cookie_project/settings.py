@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'account_module',
     'polls',
     'contact_us_module',
-    'article_module'
+    'article_module',
+    'sorl.thumbnail',
+    'order_module'
+
 ]
 
 MIDDLEWARE = [
@@ -140,3 +143,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'alinamavar315@gmail.com'
 EMAIL_HOST_PASSWORD = 'elvw jfcv zukp pvay'
 EMAIL_PORT = 587
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
+
+
+LOGIN_URL = '/login'

@@ -19,3 +19,14 @@ class feedback_Model(models.Model):
         verbose_name_plural = 'feedbacks'
 
 
+class Gallery_Model(models.Model):
+    image = models.ImageField(upload_to='images/Gallery', verbose_name='تصویر' )
+    image_two = models.ImageField(upload_to='images/Gallery', verbose_name='تصویر' )
+    image_tree = models.ImageField(upload_to='images/Gallery', verbose_name='تصویر' )
+    image_four = models.ImageField(upload_to='images/Gallery', verbose_name='تصویر' )
+    image_five = models.ImageField(upload_to='images/Gallery', verbose_name='تصویر' )
+    image_six = models.ImageField(upload_to='images/Gallery', verbose_name='تصویر' )
+    is_active = models.BooleanField(verbose_name='فعال', default=False, db_index=True)
+
+
+

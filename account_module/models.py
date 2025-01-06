@@ -29,7 +29,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, verbose_name='ایمیل')
 
     avatar = models.ImageField(upload_to='images/users', verbose_name='تصویر آواتار', null=True, blank=True)
-    email_active_code = models.CharField(max_length=75, verbose_name='کد فعالسازی ایمیل')
+    email_active_code = models.CharField(max_length=75, verbose_name='کد فعالسازی ایمیل', null=True, blank=True)
     about_user = models.TextField(verbose_name='درباره کاربر', null=True, blank=True)
     address = models.CharField(max_length=250, verbose_name='آدرس کاربر')
 

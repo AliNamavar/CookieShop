@@ -53,6 +53,7 @@
     width: fit-content;
     z-index: 1000;
 }
+
 .custom-link {
     color: #000; /* رنگ لینک در حالت عادی */
     text-decoration: none; /* حذف خط زیر لینک */
@@ -63,10 +64,161 @@
     background-color: #f0f0f0; /* پس‌زمینه هنگام هاور (اختیاری) */
     text-decoration: underline; /* خط زیر لینک هنگام هاور (اختیاری) */
 }
+
 .map-style {
     height: 300px;
     border: 0;
     allowfullscreen: true; /* این ویژگی فقط در HTML اعمال می‌شود */
     aria-hidden: false; /* این ویژگی فقط در HTML اعمال می‌شود */
     tabindex: 0; /* این ویژگی فقط در HTML اعمال می‌شود */
+}
+
+.divider {
+    margin-top: 20px;
+    border: 1px solid #444444; /* استایل خط */
+}
+
+.blog__details__ingredients ul li {
+    list-style: none;
+    font-size: 16px;
+    color: #444444;
+    line-height: 30px;
+    letter-spacing: 1px;
+    padding-left: 40px;
+    position: relative;
+    display: block;
+    max-width: 100%; /* عرض کامل تا خط افقی */
+    white-space: normal; /* شکستن متن در فضای طبیعی */
+    word-break: break-word; /* شکستن کلمات طولانی */
+    text-align: justify; /* تراز متن */
+}
+
+/*.article-author-label {*/
+/*    font-size: 14px; !* اندازه متن *!*/
+/*    font-weight: bold; !* ضخامت متن *!*/
+/*    color: #555; !* رنگ متن *!*/
+/*    margin-bottom: 5px; !* فاصله از نام نویسنده *!*/
+/*    text-transform: uppercase; !* تبدیل به حروف بزرگ *!*/
+/*}*/
+
+.article-author-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: inline-block; /* برای مدیریت فاصله در خط */
+    margin-right: 10px; /* فاصله از سمت راست */
+}
+
+.article-author-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
+    display: inline-block; /* نمایش در یک خط */
+}
+
+
+.article-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+    margin-top: 10px;
+}
+
+.no-products-message {
+    font-size: 18px;
+    color: #555;
+    margin-top: 5px;
+}
+
+
+.instagram-link {
+    color: black;
+    text-decoration: none;
+}
+
+.instagram-link:hover {
+    color: darkorange;
+    text-decoration: underline;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+.iamge-control-size-product {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.big_img {
+    width: 100%;
+    max-width: 425px;
+    max-height: 425px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+.cart-image-size {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
+
+
+.shop__pagination a.active {
+    font-weight: bold;
+    color: white;
+    background-color: #000000;
+    border-color: #007bff;
+}
+.shop__pagination a {
+  text-decoration: none;
+  color: black;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  top: 2px;
+}
+
+.shop__pagination a span {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  top: 2px;
+}
+
+.shop__pagination a span:hover {
+  /*background: #007bff;*/
+  color: #007bff;
+}
+
+.shop__pagination a.active {
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.shop__pagination a:hover {
+  background-color: #f1f1f1;
+  color: #007bff;
+
 }
