@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function addProductToCart(productId) {
     const productCount = $('#pro_qty_' + productId).val();
     $.get('/add-to-cart?product_id=' + productId + '&count=' + productCount).then(res => {
+        console.log(res)
         swal.fire({
             text: res.text,
             icon: res.icon,
@@ -178,4 +179,19 @@ function check_address(){
         // if(res.status === 'success')
     })
 
+}
+
+function addProductToFavorite(productId){
+    // console.log(productId)
+    $.get('/add-product-to-favorite?products_id=' + productId).then(res =>{
+        console.log(res)
+         swal.fire({
+            text: res.text,
+            icon: res.icon,
+            showCancelButton: false,
+            confirmButtonText: res.confirmButtonTextBack,
+            reverseButtons: true
+        })
+
+    })
 }

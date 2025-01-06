@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'contact_us_module',
     'article_module',
     'sorl.thumbnail',
-    'order_module'
+    'order_module',
+    'favorite_module'
 
 ]
 
