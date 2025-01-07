@@ -31,6 +31,7 @@
         <option value="$MODULE_DIR$/contact_us_module/templates" />
         <option value="$MODULE_DIR$/article_module/templates" />
         <option value="$MODULE_DIR$/order_module/templates" />
+        <option value="$MODULE_DIR$/favorite_module/templates" />
       </list>
     </option>
   </component>

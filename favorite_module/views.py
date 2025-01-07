@@ -29,4 +29,28 @@ class add_to_favorites(View):
                         'icon': 'success'
 
                     })
+                return JsonResponse({
+                    'status': '404',
+                    'text': 'محصول مورد نظر یافت نشد',
+                    'confirmButtonTextBack': 'باشه',
+                    'icon': 'error'
+
+                })
+
+        return JsonResponse({
+            'status': 'not_auth',
+            'text': 'برای اضافه کردنه محصول به سبد خرید میبایست اول وارد سایت شوید',
+            'confirmButtonTextBack': 'لاگ این',
+            'icon': 'info'
+        })
+
+
+class Favorite_View(View):
+    def get(self, request):
+        current_favorite, created = Favorite.objects.prefetch_related('favoritedetail_set').get_or_create(user=request.user)
+
+        context = {
+            'favorites': current_favorite
+        }
+        return render(request, 'favorite_module/favorite_list.html', context)
 

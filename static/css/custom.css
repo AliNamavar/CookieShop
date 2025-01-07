@@ -167,6 +167,7 @@
     width: 90px;
     height: 90px;
     object-fit: cover;
+    /*display: flex;*/
 }
 
 
@@ -221,4 +222,24 @@
   background-color: #f1f1f1;
   color: #007bff;
 
+}
+.product__cart__item__pic {
+    display: flex;
+    align-items: center;
+}
+
+.product__cart__item__text {
+    margin-left: 50px;
+    /* تغییرات اضافی */
+}
+
+.product__cart__item__text h6 {
+    color: #111111;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.2;
+    position: relative;
+    top: -8px;
 }

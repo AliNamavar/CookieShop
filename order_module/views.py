@@ -92,6 +92,8 @@ def add_to_cart(request):
         if product is not None:
             current_cart, created = Order.objects.get_or_create(is_paid=False, user=request.user)
             current_cart_product = current_cart.orderdetail_set.filter(product_id=product_id).first()
+            # count = int(request.GET.get('count')) or current_cart_product.product.number
+
             if current_cart_product is not None:
                 current_cart_product.count += int(count)
                 current_cart_product.save()

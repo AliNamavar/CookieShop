@@ -1985,7 +1985,7 @@ ol {
     margin-right: 30px;
 }
 
-.shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__text {
+.shopping__cart__table table tbody tr td.product__cart__item .  product__cart__item__text {
     overflow: hidden;
     padding-top: 21px;
 }
@@ -4182,6 +4182,7 @@ ol {
     .wishlist__cart__table table tbody tr td.product__cart__item .product__cart__item__pic {
         float: none;
         margin-right: 0;
+
     }
 
     .wishlist__cart__table table tbody tr td.product__cart__item {

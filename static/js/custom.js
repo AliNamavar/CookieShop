@@ -191,7 +191,32 @@ function addProductToFavorite(productId){
             showCancelButton: false,
             confirmButtonText: res.confirmButtonTextBack,
             reverseButtons: true
-        })
+        }).then(confirm =>{
+            if(confirm.isConfirmed && res.status === 'not_auth'){
+                window.location.href = '/login';
+            }
+         })
 
     })
+}
+
+
+function addProductToCartFavorite(event, productId) {
+    // event.preventDefault(); // جلوگیری از بارگذاری مجدد صفحه
+    console.log(productId);
+    const minProductCount = $('#min_value_count_' + productId).val();
+    $.get('/add-to-cart?product_id=' + productId + '&count=' + minProductCount).then(res => {
+        console.log(res);
+        Swal.fire({
+            text: 'حداقل مقداری که میتونید این محصول رو خریداری کنید به سبد خرید شما اضافه شد میتوانید در سبد خرید مقدار را ویرایش کنید',
+            icon: res.icon,
+            showCancelButton: false,
+            confirmButtonText: res.confirmButtonTextBack,
+            reverseButtons: true
+        }).then(confirm => {
+            if (confirm.isConfirmed && res.status === 'not_auth') {
+                window.location.href = '/login';
+            }
+        });
+    });
 }
