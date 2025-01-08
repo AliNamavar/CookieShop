@@ -220,3 +220,12 @@ function addProductToCartFavorite(event, productId) {
         });
     });
 }
+function removeProductFavorite(ProductId){
+    console.log(ProductId)
+    $.get('/Favorite-rm-product?productId=' + ProductId).then(res =>{
+        console.log(res)
+        if(res.status === 'success'){
+            $('#ajax_rm_favorite_product').html(res.data)
+        }
+    })
+}

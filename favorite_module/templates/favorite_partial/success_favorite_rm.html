@@ -1,0 +1,67 @@
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Wishlist</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__links">
+                        <a href="{% url 'home' %}">Home</a>
+                        <span>Wishlist</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="wishlist spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="wishlist__cart__table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Unit Price</th>
+                                <th>Min Number</th>
+                                {#                                <th>Quantity</th>#}
+                                {#                                <th>Total</th>#}
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for favorite in favorites.favoritedetail_set.all %}
+                                <tr>
+                                    <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                            <div>
+                                                <img class="cart-image-size" src="{{ favorite.product.image.url }}"
+                                                     alt="">
+                                            </div>
+                                            <div class="product__cart__item__text">
+                                                <h6>{{ favorite.product.title }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price">$ {{ favorite.product.price }}</td>
+                                    <td class="cart__stock">{{ favorite.product.number }}</td>
+                                    <input type="hidden" value="{{ favorite.product.number }}"
+                                           id="min_value_count_{{ favorite.product.id }}">
+                                    <td class="cart__btn"><a href="#"
+                                         onclick="addProductToCartFavorite(event, {{ favorite.product.id }})"
+                                         class="primary-btn">Add to cart</a></td>
+                                    <td class="cart__close" onclick="removeProductFavorite({{ favorite.id }})"><span class="icon_close"></span></td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
