@@ -27,13 +27,16 @@
                                 <th>Product</th>
                                 <th>Unit Price</th>
                                 <th>Min Number</th>
-                                {#                                <th>Quantity</th>#}
-                                {#                                <th>Total</th>#}
+                                                                <th>Quantity</th>
+                                                                <th>Total</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
+                            {% if favorites.favoritedetail_set.all %}
+                            	
+                         
                             {% for favorite in favorites.favoritedetail_set.all %}
                                 <tr>
                                     <td class="product__cart__item">
@@ -57,6 +60,9 @@
                                     <td class="cart__close" onclick="removeProductFavorite({{ favorite.id }})"><span class="icon_close"></span></td>
                                 </tr>
                             {% endfor %}
+                                {% else %}
+                                <div class="alert alert-success"> <p>لیست علاقه مندی های شما خالی است</p> </div>
+                               {% endif %} 
 
                             </tbody>
                         </table>

@@ -90,14 +90,19 @@ class AboutView(TemplateView):
 
 
 def header_component(request):
-    # cart, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(user=request.user, is_paid=False)
-    # total_price = 0
-    # for product_detail in cart.orderdetail_set.all():
-    #     total_price += product_detail.product.price * product_detail.count
+    if request.user.is_authenticated:
+        cart, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(user=request.user,
+                                                                                        is_paid=False)
+        total_price = 0
+        for product_detail in cart.orderdetail_set.all():
+            total_price += product_detail.product.price * product_detail.count
+
+    else:
+        total_price = 0
 
     context = {
         'settings': site_settings.objects.filter(is_main_setting=True).first(),
-        # 'total_price': total_price,
+        'total_price': total_price,
 
     }
     return render(request, 'shared/header_component.html', context)
