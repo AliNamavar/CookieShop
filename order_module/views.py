@@ -168,13 +168,12 @@ def remove_order_detail(request):
 
     return JsonResponse({
         'status': 'success',
-        'body': render_to_string('cart_partials/cart_list_partials.html', context)
+        'body': render_to_string('cart_partials/cart_list_partials.html', context),
+        'cart_total_price': current_order.calculate_total()
+
+
     })
 
-# method_decorator(login_required, name='dispatch')
-# class test_view(View):
-#     def get(self, request):
-#         pass
 
 @login_required
 def update_cart_product_count(request):

@@ -39,7 +39,7 @@ class add_to_favorites(View):
                         'status': 'error',
                         'text': 'محصول در لیست علاقه مندی های شما وجود دارد',
                         'confirmButtonTextBack': 'باشه',
-                        'icon': 'error'
+                        'icon': 'info'
                     })
 
         return JsonResponse({
