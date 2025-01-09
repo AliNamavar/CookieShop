@@ -20,8 +20,8 @@ class add_to_favorites(View):
             product = Product.objects.filter(pk=product_id, is_active=True).first()
             if product is not None:
                 current_favorite, created = Favorite.objects.get_or_create(user=request.user)
-                current_favorite_product = current_favorite.favoritedetail_set.filter(pk=product_id).first()
-                if current_favorite_product is None:
+                current_favorite_product = current_favorite.favoritedetail_set.filter(product_id=product_id).exists()
+                if not current_favorite_product:
                     new_detail = FavoriteDetail(
                         favorite=current_favorite,
                         product=product,
@@ -34,13 +34,13 @@ class add_to_favorites(View):
                         'icon': 'success'
 
                     })
-                return JsonResponse({
-                    'status': '404',
-                    'text': 'محصول مورد نظر یافت نشد',
-                    'confirmButtonTextBack': 'باشه',
-                    'icon': 'error'
-
-                })
+                else:
+                    return JsonResponse({
+                        'status': 'error',
+                        'text': 'محصول در لیست علاقه مندی های شما وجود دارد',
+                        'confirmButtonTextBack': 'باشه',
+                        'icon': 'error'
+                    })
 
         return JsonResponse({
             'status': 'not_auth',
@@ -52,12 +52,15 @@ class add_to_favorites(View):
 @method_decorator(login_required, name='dispatch')
 class Favorite_View(View):
     def get(self, request):
-        current_favorite, created = Favorite.objects.prefetch_related('favoritedetail_set').get_or_create(user=request.user)
+        current_favorite, created = Favorite.objects.prefetch_related('favoritedetail_set').get_or_create(
+            user=request.user)
 
         context = {
             'favorites': current_favorite
         }
         return render(request, 'favorite_module/favorite_list.html', context)
+
+
 @method_decorator(login_required, name='dispatch')
 class remove_product_from_favorites(View):
     def get(self, request):
@@ -87,8 +90,3 @@ class remove_product_from_favorites(View):
         return JsonResponse({
             'status': 'error'
         })
-
-
-
-
-

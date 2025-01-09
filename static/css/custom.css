@@ -244,24 +244,23 @@
     top: -8px;
 }
 
-/* تنظیم ستون‌های Unit Price و Min Number */
 .favorite_tr_titles_set th:nth-child(2),
 .favorite_tr_titles_set th:nth-child(3) {
-    text-align: center; /* تنظیم متن به مرکز */
-    padding: 10px; /* تنظیم فضای داخلی برای ستون‌ها */
+    text-align: center;
+    padding: 10px;
 }
 
-/* تنظیمات عمومی برای دیگر ستون‌ها به جز ستون Product */
+
 .wishlist__cart__table td {
-    text-align: center; /* تنظیم متن به مرکز */
+    text-align: center;
 }
 
 .product__cart__item__text h6 {
-    margin-top: 0; /* حذف فاصله بالا */
+    margin-top: 0;
 }
 
 .cart__price, .cart__stock, .cart__btn, .cart__close {
-    vertical-align: middle; /* تنظیم محتوا به مرکز عمودی */
+    vertical-align: middle;
 }
 
 

@@ -15,15 +15,14 @@ from utils.http_service import get_client_ip
 class ProductListView(ListView):
     template_name = 'product_module/product_list.html'
     model = Product
-    paginate_by = 4
+    paginate_by = 8
     context_object_name = 'products'
 
     def get_queryset(self):
         query = super(ProductListView, self).get_queryset()
         query = query.filter(is_active=True)
 
-        # todo: search_html name change
-        search_query = self.request.GET.get('search_html', None)
+        search_query = self.request.GET.get('search', None)
         if search_query:
             query = query.filter(Q(title__icontains=search_query))
 
@@ -36,7 +35,7 @@ class ProductListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
         context['categorise'] = productCategory.objects.filter(is_active=True).all()
-        context['search_query'] = self.request.GET.get('search_html', '')
+        context['search_query'] = self.request.GET.get('search', '')
         context['product_count'] = Product.objects.all().count()
 
         return context

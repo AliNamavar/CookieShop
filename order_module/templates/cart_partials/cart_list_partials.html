@@ -23,6 +23,8 @@
                 <div class="col-lg-8">
                     <div class="shopping__cart__table">
                         <table>
+                            {% if order.orderdetail_set.all %}
+                        
                             <thead>
                             <tr>
                                 <th>Product</th>
@@ -31,7 +33,6 @@
                                 <th></th>
                             </tr>
                             </thead>
-                            {% if order.orderdetail_set.all %}
                             <tbody>
                             {% for product in order.orderdetail_set.all %}
 

@@ -92,7 +92,6 @@ def add_to_cart(request):
         if product is not None:
             current_cart, created = Order.objects.get_or_create(is_paid=False, user=request.user)
             current_cart_product = current_cart.orderdetail_set.filter(product_id=product_id).first()
-            # count = int(request.GET.get('count')) or current_cart_product.product.number
 
             if current_cart_product is not None:
                 current_cart_product.count += int(count)
@@ -109,8 +108,8 @@ def add_to_cart(request):
                 'status': 'success',
                 'text': 'محصول با موفقیت به سبد خرید شما اضافه شد',
                 'confirmButtonTextBack': 'باشه',
-                'icon': 'success'
-
+                'icon': 'success',
+                'cart_total_price': current_cart.calculate_total()
             })
         else:
             return JsonResponse({
@@ -185,7 +184,9 @@ def update_cart_product_count(request):
     except (TypeError, ValueError):
         return JsonResponse({
             'status': 'id_not_found',
-            'message': 'Invalid product ID or count'
+            'message': 'Invalid product ID or count',
+            # 'cart_total_price': current_cart.calculate_total()
+
         })
 
     current_order, created = Order.objects.get_or_create(is_paid=False, user=request.user)
@@ -218,5 +219,7 @@ def update_cart_product_count(request):
 
     return JsonResponse({
         'status': 'success',
-        'body': data
+        'body': data,
+        'cart_total_price': current_order.calculate_total()
+
     })

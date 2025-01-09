@@ -77,10 +77,25 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// function addProductToCart(productId) {
+//     const productCount = $('#pro_qty_' + productId).val();
+//     $.get('/add-to-cart?product_id=' + productId + '&count=' + productCount).then(res => {
+//         swal.fire({
+//             text: res.text,
+//             icon: res.icon,
+//             showCancelButton: false,
+//             confirmButtonText: res.confirmButtonTextBack,
+//             reverseButtons: true
+//         }).then(confirm => {
+//             if (confirm.isConfirmed && res.status === 'not_auth') {
+//                 window.location.href = '/login';
+//             }
+//         });
+//     });
+// }
 function addProductToCart(productId) {
     const productCount = $('#pro_qty_' + productId).val();
     $.get('/add-to-cart?product_id=' + productId + '&count=' + productCount).then(res => {
-        console.log(res)
         swal.fire({
             text: res.text,
             icon: res.icon,
@@ -92,6 +107,10 @@ function addProductToCart(productId) {
                 window.location.href = '/login';
             }
         });
+
+        if (res.status === 'success') {
+            $('#cartPriceAjax .cart__price span').text('$' + res.cart_total_price);
+        }
     });
 }
 
@@ -120,6 +139,10 @@ function update_detail_count(element) {
         if (res.status === 'success') {
             $('#order-detail-content').html(res.body);
             bindQuantityButtons();
+            if (res.status === 'success') {
+                $('#cartPriceAjax .cart__price span').text('$' + res.cart_total_price);
+            }
+
         } else {
             console.error(res.message);
         }
@@ -166,44 +189,42 @@ $(document).ready(function () {
 });
 
 
-function fillpage(num){
+function fillpage(num) {
     $('#input-page-fill').val(num)
     $('#form-fill-page').submit();
 
 
 }
 
-function check_address(){
+function check_address() {
     var text = $('#id_address_address_check').val()
-    $.post('check-address', {address: text}).then(res =>{
+    $.post('check-address', {address: text}).then(res => {
         // if(res.status === 'success')
     })
 
 }
 
-function addProductToFavorite(productId){
+function addProductToFavorite(productId) {
     // console.log(productId)
-    $.get('/add-product-to-favorite?products_id=' + productId).then(res =>{
+    $.get('/add-product-to-favorite?products_id=' + productId).then(res => {
         console.log(res)
-         swal.fire({
+        swal.fire({
             text: res.text,
             icon: res.icon,
             showCancelButton: false,
             confirmButtonText: res.confirmButtonTextBack,
             reverseButtons: true
-        }).then(confirm =>{
-            if(confirm.isConfirmed && res.status === 'not_auth'){
+        }).then(confirm => {
+            if (confirm.isConfirmed && res.status === 'not_auth') {
                 window.location.href = '/login';
             }
-         })
+        })
 
     })
 }
 
 
 function addProductToCartFavorite(event, productId) {
-    // event.preventDefault(); // جلوگیری از بارگذاری مجدد صفحه
-    console.log(productId);
     const minProductCount = $('#min_value_count_' + productId).val();
     $.get('/add-to-cart?product_id=' + productId + '&count=' + minProductCount).then(res => {
         console.log(res);
@@ -220,11 +241,13 @@ function addProductToCartFavorite(event, productId) {
         });
     });
 }
-function removeProductFavorite(ProductId){
+
+
+function removeProductFavorite(ProductId) {
     console.log(ProductId)
-    $.get('/Favorite-rm-product?productId=' + ProductId).then(res =>{
+    $.get('/Favorite-rm-product?productId=' + ProductId).then(res => {
         console.log(res)
-        if(res.status === 'success'){
+        if (res.status === 'success') {
             $('#ajax_rm_favorite_product').html(res.data)
         }
     })
