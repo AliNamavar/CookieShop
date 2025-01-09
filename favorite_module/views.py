@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from cookie_project.settings import LOGIN_URL
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
@@ -11,7 +12,7 @@ from product_module.models import Product
 
 
 # Create your views here.
-# method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class add_to_favorites(View):
     def get(self, request):
         product_id = request.GET.get('products_id')
@@ -48,7 +49,7 @@ class add_to_favorites(View):
             'icon': 'info'
         })
 
-# method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class Favorite_View(View):
     def get(self, request):
         current_favorite, created = Favorite.objects.prefetch_related('favoritedetail_set').get_or_create(user=request.user)
@@ -57,7 +58,7 @@ class Favorite_View(View):
             'favorites': current_favorite
         }
         return render(request, 'favorite_module/favorite_list.html', context)
-
+@method_decorator(login_required, name='dispatch')
 class remove_product_from_favorites(View):
     def get(self, request):
         product_id = request.GET.get('productId')
