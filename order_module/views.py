@@ -74,7 +74,7 @@ def verify_payment(authority):
     return response
 
 
-
+@login_required
 def add_to_cart(request):
     product_id = request.GET.get('product_id')
     count = int(request.GET.get('count'))
@@ -207,18 +207,15 @@ def update_cart_product_count(request):
     detail.count = count
     detail.save()
 
-    total_price = sum(item.product.price * item.count for item in current_order.orderdetail_set.all())
 
     context = {
         'order': current_order,
-        'total_price': total_price,
+        'total_price': current_order.calculate_total,
     }
-
-    data = render_to_string('cart_partials/cart_list_partials.html', context)
 
     return JsonResponse({
         'status': 'success',
-        'body': data,
+        'body': render_to_string('cart_partials/cart_list_partials.html', context),
         'cart_total_price': current_order.calculate_total()
 
     })
