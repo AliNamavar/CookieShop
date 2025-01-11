@@ -2,4 +2,12 @@
     {% if error_message %}
         <p> {{ error_message }}<a href="{% url 'login' %}" > لاگ این  </a> کنید </p>
     {% endif %}
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form" method="get" action="{% url 'product-list' %}">
+                <input type="text" name="search" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
 </div>

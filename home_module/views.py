@@ -68,7 +68,6 @@ class SubmitFeedbackView(View):
                 'body': render_to_string('partials/feedback_success.html', context)
             })
 
-        print(form.errors)
         return JsonResponse({
             'status': 'error',
             'text': 'خطایی در ارسال نظر وجود دارد.',

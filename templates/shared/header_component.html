@@ -20,10 +20,10 @@
                                 {#                                    </li>#}
                                 {% if request.user.is_authenticated %}
                                     <li><a href="{% url 'logout' %}">log Out</a></li>
-{#                                    <li><a href="#">Profile</a></li>#}
+                                    {#                                    <li><a href="#">Profile</a></li>#}
                                     {% if request.user.is_superuser %}
-                                    <li><a href="/admin">Admin</a></li>
-                                    {% endif %} 
+                                        <li><a href="/admin">Admin</a></li>
+                                    {% endif %}
                                 {% else %}
                                     <li><a href="{% url 'register' %}">Register</a></li>
                                     <li><a href="{% url 'login' %}">login</a></li>
@@ -34,8 +34,13 @@
                             <a href="{% url 'home' %}"><img src="{{ settings.site_logo.url }}" alt=""></a>
                         </div>
                         <div class="header__top__right">
+                            <div class="header__top__right__links">
+                                <a href="#" class="search-switch"><img src="/static/img/icon/search.png" alt=""></a>
+                                <a href="{% url 'favorite_list' %}"><img src="/static/img/icon/heart.png" alt=""></a>
+                            </div>
                             <div class="header__top__right__cart" id="cartPriceAjax">
-                                <a href="{% url 'cart_detail' %}"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
+                                <a href="{% url 'cart_detail' %}"><img src="/static/img/icon/cart.png" alt="">
+                                    <span>0</span></a>
                                 <div class="cart__price">Cart: <span>${{ total_price }}</span></div>
                             </div>
                         </div>
@@ -57,21 +62,32 @@
                         <li class="{% if request.resolver_match.url_name == 'product-list' %}active{% endif %}"><a
                                 href="{% url 'product-list' %}">Shop</a></li>
                         <li><a href="{% url 'favorite_list' %}  ">Wishlist</a>
-{#                            <ul class="dropdown">#}
-{#                                <li><a href="./shop-details.html">Shop Details</a></li>#}
-{#                                <li><a href="./shoping-cart.html">Shoping Cart</a></li>#}
-{#                                <li><a href="./checkout.html">Check Out</a></li>#}
-{#                                <li><a href="./wisslist.html">Wisslist</a></li>#}
-{#                                <li><a href="./Class.html">Class</a></li>#}
-{#                                <li><a href="./blog-details.html">Blog Details</a></li>#}
-{#                            </ul>#}
+                            {#                            <ul class="dropdown">#}
+                            {#                                <li><a href="./shop-details.html">Shop Details</a></li>#}
+                            {#                                <li><a href="./shoping-cart.html">Shoping Cart</a></li>#}
+                            {#                                <li><a href="./checkout.html">Check Out</a></li>#}
+                            {#                                <li><a href="./wisslist.html">Wisslist</a></li>#}
+                            {#                                <li><a href="./Class.html">Class</a></li>#}
+                            {#                                <li><a href="./blog-details.html">Blog Details</a></li>#}
+                            {#                            </ul>#}
                         </li>
                         <li><a href="{% url 'article-list' %}">Blog</a></li>
                         {#                            <li><a href="./contact.html">Contact</a></li>#}
-                        <li class="{% if request.resolver_match.url_name == 'contact-us' %}active{% endif %}"><a href="{% url 'contact-us' %}">تماس با ما</a></li>
+                        <li class="{% if request.resolver_match.url_name == 'contact-us' %}active{% endif %}"><a
+                                href="{% url 'contact-us' %}">تماس با ما</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </div>
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form" method="get" action="{% url 'product-list' %}">
+                <input type="text" name="search" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
 </header>
