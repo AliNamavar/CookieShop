@@ -227,24 +227,24 @@ function addProductToFavorite(productId) {
     })
 }
 
-
 function addProductToCartFavorite(event, productId) {
     const minProductCount = $('#min_value_count_' + productId).val();
     $.get('/add-to-cart?product_id=' + productId + '&count=' + minProductCount).then(res => {
-        console.log(res);
-        Swal.fire({
-            text: 'حداقل مقداری که میتونید این محصول رو خریداری کنید به سبد خرید شما اضافه شد میتوانید در سبد خرید مقدار را ویرایش کنید',
-            icon: res.icon,
-            showCancelButton: false,
-            confirmButtonText: res.confirmButtonTextBack,
-            reverseButtons: true
-        }).then(confirm => {
-            if (confirm.isConfirmed && res.status === 'not_auth') {
-                window.location.href = '/login';
-            }
-        });
+        if (res.status === 'success') {
+            $('#cartPriceAjax .cart__price span').text('$' + res.cart_total_price);
+            Swal.fire({
+                text: 'حداقل مقداری که میتونید این محصول رو خریداری کنید به سبد خرید شما اضافه شد میتوانید در سبد خرید مقدار را ویرایش کنید',
+                icon: res.icon || 'success',
+                reverseButtons: true
+            }).catch(error => {
+                console.error("SweetAlert Error:", error);
+            });
+        }
+    }).catch(error => {
+        console.error("AJAX Error:", error);
     });
 }
+
 
 
 function removeProductFavorite(ProductId) {

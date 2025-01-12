@@ -121,7 +121,6 @@
                             <form method="post" action="{% url 'article-comment' %}" id="commentForm"
                                   hx-post="{% url 'article-comment' %}" hx-target="#comments-section"
                                   hx-swap="innerHTML">
-                                {#                                          hx-include="[name=articleid], [name=articleparentId]">#}
                                 {% csrf_token %}
                                 <div class="checkout__input">
                                     <p>Leave a comment<span>*</span></p>
@@ -137,15 +136,6 @@
                                             {{ message }}
                                         {% endfor %}
                                     </div>
-{#                                    <script>#}
-{#                                        #}
-{#                                        setTimeout(function () {#}
-{#                                            var messageBox = document.getElementById('message-box');#}
-{#                                            if (messageBox) {#}
-{#                                                messageBox.style.display = 'none';#}
-{#                                            }#}
-{#                                        }, 3000); #}
-{#                                    </script>#}
                                 {% endif %}
                             </form>
 

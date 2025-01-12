@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import View
 
 from favorite_module.models import Favorite, FavoriteDetail
+from order_module.models import Order
 from order_module.views import add_to_cart
 from product_module.models import Product
 
@@ -19,6 +20,7 @@ class add_to_favorites(View):
         if request.user.is_authenticated:
             product = Product.objects.filter(pk=product_id, is_active=True).first()
             if product is not None:
+                # current_cart, created = Order.objects.get_or_create(is_paid=False, user=request.user)
                 current_favorite, created = Favorite.objects.get_or_create(user=request.user)
                 current_favorite_product = current_favorite.favoritedetail_set.filter(product_id=product_id).exists()
                 if not current_favorite_product:
@@ -31,7 +33,7 @@ class add_to_favorites(View):
                         'status': 'success',
                         'text': 'محصول با موفقیت به لیست علاقه مندی ها اضافه شد',
                         'confirmButtonTextBack': 'باشه',
-                        'icon': 'success'
+                        'icon': 'success',
 
                     })
                 else:
@@ -48,6 +50,7 @@ class add_to_favorites(View):
             'confirmButtonTextBack': 'لاگ این',
             'icon': 'info'
         })
+
 
 @method_decorator(login_required, name='dispatch')
 class Favorite_View(View):

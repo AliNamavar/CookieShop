@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView
 from django.db.models import Count
-
 from account_module.models import User
 from order_module.models import Order
 from product_module.models import Product, productCategory

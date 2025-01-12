@@ -5,16 +5,13 @@ from django.urls import reverse
 from django.views.generic import ListView, TemplateView, DetailView
 from django.template.loader import render_to_string
 from django.http import HttpResponse
-
 from product_module.models import ProductVisit
 from utils.http_service import get_client_ip
 from .forms import CommentForm
 from .models import Article, ArticleCategory, article_comments, ArticleVisited
 from django.contrib.messages import get_messages
 
-
 # Create your views here.
-
 
 class ArticleListView(ListView):
     model = Article
@@ -95,7 +92,6 @@ class ArticleDetailView(DetailView):
                 "success_massage": "نظر شما با موفقیت ذخیره شد",
                 'comments': (article_comments.objects.filter(parent_id=None, article_id=article_id).
                              prefetch_related('article_comments_set').order_by('-created_date')),
-                # 'form': CommentForm(),
                 'count': article_comments.objects.filter(article_id=article_id).count(),
 
             })

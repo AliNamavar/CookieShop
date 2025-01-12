@@ -131,9 +131,6 @@ class LoginView(View):
                     )
                     messages.success(request, 'اکانت شما فعال نست لطفا اول اکانت خود را فعال کنید کد فعالسازی به ایمیل شما ارسال شد')
                     return redirect('email_verification')
-                    # return render(request, 'account_module/login.html', context={
-                    #     'form': form
-                    # })
             else:
                 form.add_error('email', 'ایمیل وارد شده صحیح نیست')
                 return render(request, 'account_module/login.html', context={
