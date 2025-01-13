@@ -1,0 +1,94 @@
+{#{% extends 'shared/layout.html' %}#}
+{##}
+{#{% block title %}#}
+{#    Previous Orders#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#    <section class="order-history spad">#}
+{#        <div class="container">#}
+{#            <h4>Your Previous Orders</h4>#}
+{#            {% if orders %}#}
+{#                <div class="order-list">#}
+{#                    {% for order in orders %}#}
+{#                        <div class="order-item">#}
+{#                            <div class="order-header">#}
+{#                                <h5>Order #{{ order.id }} - {{ order.payment_date|date:"F j, Y" }}</h5>#}
+{#                                <p>Total: ${{ total_Price }}</p>#}
+{#                            </div>{{ total_Price }}#}
+{#                            <ul class="order-details">#}
+{#                                {% for item in order.orderdetail_set.all %}#}
+{#                                    <li class="order-detail-item">#}
+{#                                        <div class="product-image">#}
+{#                                            <img src="{{ item.product.image.url }}" alt="{{ item.product.title }}">#}
+{#                                        </div>#}
+{#                                        <div class="product-info">#}
+{#                                            <p><strong>{{ item.product.title }}</strong></p>#}
+{#                                            <p>Quantity: {{ item.count }}</p>#}
+{#                                            <p>Price: ${{ item.final_price }}</p>#}
+{#                                        </div>#}
+{#                                    </li>#}
+{#                                {% endfor %}#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            {% else %}#}
+{#                <p>You have no previous orders.</p>#}
+{#            {% endif %}#}
+{#        </div>#}
+{#    </section>#}
+{#{% endblock %}#}
+{% extends 'shared/layout.html' %}
+
+{% block title %}
+    Previous Orders
+{% endblock %}
+
+{% block content %}
+    <section class="order-history spad">
+        <div class="container">
+            <h4>Your Previous Orders</h4>
+            {% if orders %}
+                <div class="order-list">
+                    {% for order in orders %}
+                        <div class="order-item">
+                            <div class="order-header">
+                                <h5>Order #{{ order.id }} - {{ order.payment_date|date:"F j, Y" }}</h5>
+                                <p>Total: ${{ order.calculate_total }}</p>
+                            </div>
+                            <ul class="order-details">
+                                {% for item in order.orderdetail_set.all %}
+                                    <li class="order-detail-item">
+                                        <div class="product-image">
+                                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                        </div>
+                                        <div class="product-info">
+                                            <p><strong>{{ item.product.name }}</strong></p>
+                                            <p>Quantity: {{ item.count }}</p>
+                                            <p>Price: ${{ item.final_price }}</p>
+                                        </div>
+                                    </li>
+                                    <input type="hidden" value="{{ item.product.number }}"
+                                           id="min_value_count_{{ item.product.id }}">
+{#                                    <a href="#"#}
+{#                                       onclick="addProductToCartFavorite(event, {{ item.product.id }})"#}
+
+
+                                {% endfor %}
+                            
+{#                                       class="primary-btn add-to-cart-btn">Add to Cart</a>#}
+
+
+
+                            </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>You have no previous orders.</p>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
+

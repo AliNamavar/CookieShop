@@ -1,27 +1,3 @@
-/*.alert-success {*/
-/*    background-color: #e0f7fa; !* رنگ آبی ملایم *!*/
-/*    color: #00796b; !* رنگ متن *!*/
-/*    border: 1px solid #00796b; !* حاشیه‌ای هماهنگ *!*/
-/*    padding: 10px 20px; !* فاصله داخلی *!*/
-/*    border-radius: 10px; !* لبه‌های گرد *!*/
-/*    text-align: center; !* متن وسط چین *!*/
-/*    font-size: 14px; !* اندازه متن *!*/
-/*    width: fit-content; !* اندازه متناسب با متن *!*/
-/*    margin: 20px auto; !* فاصله و مرکزیت *!*/
-/*    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); !* سایه ظریف *!*/
-/*}*/
-/*.alert-success {*/
-/*  color: #4CAF50; !* رنگ سبز برای پیام موفقیت *!*/
-/*  font-weight: 600;*/
-/*  text-transform: uppercase;*/
-/*  border-bottom: 1px solid #e1e1e1;*/
-/*  padding-bottom: 10px;*/
-/*  margin-bottom: 20px;*/
-/*  background-color: #f1f8e9; !* پس‌زمینه روشن *!*/
-/*  padding: 10px 20px;*/
-/*  border-radius: 8px; !* گوشه‌های گرد *!*/
-/*  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); !* سایه ملایم *!*/
-/*}*/
 
 
 .overlay-message {
@@ -264,3 +240,234 @@
 }
 
 
+/*test new oldorder*/
+
+/* در فایل CSS شما */
+.order-history {
+    padding: 50px 0;
+}
+
+.order-history h4 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.order-list .order-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.order-item h5 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.order-item p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.order-item ul {
+    list-style: none;
+    padding: 0;
+}
+
+.order-item ul li {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.order-item ul li:last-child {
+    margin-bottom: 0;
+}
+/* استایل برای نمایش جزئیات سفارشات */
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.order-details {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.product-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product-info p {
+    margin: 5px 0;
+}
+
+.product-info p strong {
+    font-size: 16px;
+}
+
+.product-info p {
+    font-size: 14px;
+    color: #333;
+}
+
+.order-item p {
+    font-size: 14px;
+    color: #666;
+}
+/* استایل برای نمایش جزئیات سفارشات */
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.order-details {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.product-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product-info p {
+    margin: 5px 0;
+}
+
+.product-info p strong {
+    font-size: 16px;
+}
+
+.product-info p {
+    font-size: 14px;
+    color: #333;
+}
+
+.order-item p {
+    font-size: 14px;
+    color: #666;
+}
+
+
+/* استایل برای نمایش جزئیات سفارشات */
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.order-details {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.product-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product-info p {
+    margin: 5px 0;
+}
+
+.product-info p strong {
+    font-size: 16px;
+}
+
+.product-info p {
+    font-size: 14px;
+    color: #333;
+}
+
+.order-item p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* استایل دکمه "Add to Cart" زیر Total Price */
+.add-to-cart-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 15px;
+    float: right; /* دکمه را به سمت راست منتقل می‌کند */
+}
+
+.add-to-cart-btn:hover {
+    background-color: #45a049;
+    cursor: pointer;
+}

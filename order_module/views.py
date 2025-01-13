@@ -219,3 +219,13 @@ def update_cart_product_count(request):
         'cart_total_price': current_order.calculate_total()
 
     })
+
+
+@login_required
+def oldorders_view(request):
+    old_order = Order.objects.prefetch_related('orderdetail_set').filter(is_paid=True, user=request.user).all()
+    context = {
+        'orders': old_order,
+        'total_Price': Order.calculate_total
+    }
+    return render(request, 'order_module/oldestorderslist.html', context)
