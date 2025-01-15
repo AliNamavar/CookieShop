@@ -61,16 +61,15 @@
                                 href="{% url 'about' %}">About</a></li>
                         <li class="{% if request.resolver_match.url_name == 'product-list' %}active{% endif %}"><a
                                 href="{% url 'product-list' %}">Shop</a></li>
-                        <li><a href="{% url 'favorite_list' %}  ">Wishlist</a>
-                            {#                            <ul class="dropdown">#}
-                            {#                                <li><a href="./shop-details.html">Shop Details</a></li>#}
-                            {#                                <li><a href="./shoping-cart.html">Shoping Cart</a></li>#}
-                            {#                                <li><a href="./checkout.html">Check Out</a></li>#}
-                            {#                                <li><a href="./wisslist.html">Wisslist</a></li>#}
-                            {#                                <li><a href="./Class.html">Class</a></li>#}
-                            {#                                <li><a href="./blog-details.html">Blog Details</a></li>#}
-                            {#                            </ul>#}
-                        </li>
+                            <li><a href="{% url 'home' %}  ">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="{% url 'product-list' %}">Shop</a></li>
+                                    <li><a href="{% url 'cart_detail' %}">Cart</a></li>
+                                    <li><a href="{% url 'oldOrders' %}">PreviesOrders</a></li>
+                                    <li><a href="{% url 'favorite_list' %}">Wisslist</a></li>
+                                    <li><a href="{% url 'article-list' %}">Blog</a></li>
+                                </ul>
+                            </li>
                         <li><a href="{% url 'article-list' %}">Blog</a></li>
                         {#                            <li><a href="./contact.html">Contact</a></li>#}
                         <li class="{% if request.resolver_match.url_name == 'contact-us' %}active{% endif %}"><a

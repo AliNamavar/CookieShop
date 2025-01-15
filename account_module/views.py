@@ -46,7 +46,6 @@ class RegisterView(View):
                 )
                 new_user.set_password(user_password)
                 new_user.save()
-                # todo: send email active code to email
                 send_email(
                     subject='email active code',
                     to=user_email,
@@ -103,7 +102,7 @@ class LoginView(View):
     def get(self, request):
         return render(request, 'account_module/login.html', context={
             'form': LoginForm()
-        })
+        });
 
     def post(self, request):
         form = LoginForm(request.POST)

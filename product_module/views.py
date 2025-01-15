@@ -5,9 +5,12 @@ from django.template.defaultfilters import title
 from django.views.generic import TemplateView, ListView, DetailView
 from django.http import HttpResponse
 from django.http import Http404
+
+from favorite_module.models import Favorite, FavoriteDetail
 from product_module.models import Product, productCategory, ProductVisit, Product_Gallery
 from django.db.models import Q
 from utils.http_service import get_client_ip
+from django.db.models import Q
 
 
 # Create your views here.
@@ -74,6 +77,14 @@ class ProductDetailView(DetailView):
         related_products = Product.objects.filter(is_active=True, category__in=products.category.all()).exclude(
             id=products.id).distinct()[:12]
         context['related_products'] = related_products
+
+        if self.request.user.is_authenticated:
+            user_favorites = FavoriteDetail.objects.filter(
+                favorite__user=self.request.user
+            ).values_list('product_id', flat=True)
+            context['user_favorites'] = user_favorites
+        else:
+            context['user_favorites'] = []
 
 
         return context

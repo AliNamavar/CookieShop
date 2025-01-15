@@ -13,7 +13,7 @@ from product_module.models import Product
 
 
 # Create your views here.
-@method_decorator(login_required, name='dispatch')
+# @method_decorator(login_required, name='dispatch')
 class add_to_favorites(View):
     def get(self, request):
         product_id = request.GET.get('products_id')
@@ -46,7 +46,7 @@ class add_to_favorites(View):
 
         return JsonResponse({
             'status': 'not_auth',
-            'text': 'برای اضافه کردنه محصول به سبد خرید میبایست اول وارد سایت شوید',
+            'text': 'برای اضافه کردنه محصول به لیست علاقه مندی ها میبایست اول وارد سایت شوید',
             'confirmButtonTextBack': 'لاگ این',
             'icon': 'info'
         })

@@ -76,32 +76,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-// function addProductToCart(productId) {
-//     const productCount = $('#pro_qty_' + productId).val();
-//     $.get('/add-to-cart?product_id=' + productId + '&count=' + productCount).then(res => {
-//         swal.fire({
-//             text: res.text,
-//             icon: res.icon,
-//             showCancelButton: false,
-//             confirmButtonText: res.confirmButtonTextBack,
-//             reverseButtons: true
-//         }).then(confirm => {
-//             if (confirm.isConfirmed && res.status === 'not_auth') {
-//                 window.location.href = '/login';
-//             }
-//         });
-//     });
-// }
 function addProductToCart(productId) {
     const productCount = $('#pro_qty_' + productId).val();
     $.get('/add-to-cart?product_id=' + productId + '&count=' + productCount).then(res => {
         swal.fire({
             text: res.text,
             icon: res.icon,
-            showCancelButton: false,
             confirmButtonText: res.confirmButtonTextBack,
-            reverseButtons: true
         }).then(confirm => {
             if (confirm.isConfirmed && res.status === 'not_auth') {
                 window.location.href = '/login';
@@ -222,6 +203,13 @@ function addProductToFavorite(productId) {
             if (confirm.isConfirmed && res.status === 'not_auth') {
                 window.location.href = '/login';
             }
+            else if(res.status === 'success'){
+                $(`#product-heart-${productId}`).addClass('active');
+            }
+            // else if (res.status === 'removed') {
+            // // حذف کردن کلاس active
+            // $(`#product-heart-${productId}`).removeClass('active');
+
         })
 
     })
@@ -246,7 +234,6 @@ function addProductToCartFavorite(event, productId) {
 }
 
 
-
 function removeProductFavorite(ProductId) {
     $.get('/Favorite-rm-product?productId=' + ProductId).then(res => {
         if (res.status === 'success') {
@@ -259,4 +246,6 @@ function removeProductFavorite(ProductId) {
 
     })
 }
+
+
 

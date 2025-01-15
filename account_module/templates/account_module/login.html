@@ -12,13 +12,12 @@
             {% endfor %}
         </div>
         <script>
-            // مخفی کردن پیام بعد از 3 ثانیه
             setTimeout(function () {
                 var messageBox = document.getElementById('message-box');
                 if (messageBox) {
                     messageBox.style.display = 'none';
                 }
-            }, 3000); // زمان بر حسب میلی‌ثانیه
+            }, 3000);
         </script>
     {% endif %}
     <section class="checkout spad">
@@ -41,6 +40,7 @@
                                     <div class="checkout__input">
                                         <p>Password<span>*</span></p>
                                         {{ form.password }}
+                                        {{ form.password.errors }}
                                     </div>
                                 </div>
                             </div>
@@ -51,6 +51,7 @@
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
     </section>
