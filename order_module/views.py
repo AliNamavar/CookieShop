@@ -74,12 +74,12 @@ def verify_payment(authority):
     return response
 
 
-@login_required
 def add_to_cart(request):
     product_id = request.GET.get('product_id')
     count = int(request.GET.get('count'))
 
     if request.user.is_authenticated:
+
         product = Product.objects.filter(pk=product_id, is_active=True).first()
         if count < product.number:
             return JsonResponse({
@@ -119,13 +119,13 @@ def add_to_cart(request):
                 'icon': 'error'
 
             })
-    else:
-        return JsonResponse({
-            'status': 'not_auth',
-            'text': 'برای اضافه کردنه محصول به سبد خرید میبایست اول وارد سایت شوید',
-            'confirmButtonTextBack': 'لاگ این',
-            'icon': 'info'
-        })
+    return JsonResponse({
+        'status': 'not_auth',
+        'text': 'برای اضافه کردنه محصول به سبد خرید میبایست اول وارد سایت شوید',
+        'confirmButtonTextBack': 'لاگ این',
+        'icon': 'info',
+
+    })
 
 
 @login_required

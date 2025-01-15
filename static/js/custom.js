@@ -82,9 +82,7 @@ function addProductToCart(productId) {
         swal.fire({
             text: res.text,
             icon: res.icon,
-            showCancelButton: false,
             confirmButtonText: res.confirmButtonTextBack,
-            reverseButtons: true
         }).then(confirm => {
             if (confirm.isConfirmed && res.status === 'not_auth') {
                 window.location.href = '/login';
@@ -205,6 +203,13 @@ function addProductToFavorite(productId) {
             if (confirm.isConfirmed && res.status === 'not_auth') {
                 window.location.href = '/login';
             }
+            else if(res.status === 'success'){
+                $(`#product-heart-${productId}`).addClass('active');
+            }
+            // else if (res.status === 'removed') {
+            // // حذف کردن کلاس active
+            // $(`#product-heart-${productId}`).removeClass('active');
+
         })
 
     })

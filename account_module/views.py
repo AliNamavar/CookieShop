@@ -102,7 +102,7 @@ class LoginView(View):
     def get(self, request):
         return render(request, 'account_module/login.html', context={
             'form': LoginForm()
-        })
+        });
 
     def post(self, request):
         form = LoginForm(request.POST)

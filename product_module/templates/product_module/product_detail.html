@@ -85,9 +85,16 @@
                             </div>
                             <input type="hidden" value="{{ products.number }}" id="min_value_count_{{ products.id }}">
 
-
+                            {#heart__btn#}
                             <a onclick="addProductToCart({{ products.id }})" class="primary-btn">Add to cart</a>
-                            <a href="#" onclick="addProductToFavorite({{ products.id }})" class="heart__btn"><span class="icon_heart_alt"></span></a>
+                            {#                            <a href="#"  onclick="addProductToFavorite({{ products.id }})" class=" heart__btn  "><span class="icon_heart_alt "></span></a>#}
+                            <a href="#"
+                               onclick="addProductToFavorite({{ products.id }})"
+                               id="product-heart-{{ products.id }}"
+                               class="heart__btn {% if products.id in user_favorites %}active{% endif %}">
+                                <span class="icon_heart_alt"></span>
+                            </a>
+
                         </div>
                     </div>
                 </div>

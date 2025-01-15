@@ -61,7 +61,7 @@
                                 href="{% url 'about' %}">About</a></li>
                         <li class="{% if request.resolver_match.url_name == 'product-list' %}active{% endif %}"><a
                                 href="{% url 'product-list' %}">Shop</a></li>
-                            <li><a href="{% url 'favorite_list' %}  ">Pages</a>
+                            <li><a href="{% url 'home' %}  ">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'product-list' %}">Shop</a></li>
                                     <li><a href="{% url 'cart_detail' %}">Cart</a></li>
