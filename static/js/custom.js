@@ -106,10 +106,10 @@ function removeProductCart(productID) {
         if (res.status === 'success') {
             $('#order-detail-content').html(res.body);
             bindQuantityButtons();
-            if (res.status === 'success') {
-                $('#cartPriceAjax .cart__price span').text('$' + res.cart_total_price);
+            // if (res.status === 'success') {
+            $('#cartPriceAjax .cart__price span').text('$' + res.cart_total_price);
 
-            }
+            // }
         }
     });
 }

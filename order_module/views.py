@@ -184,7 +184,6 @@ def update_cart_product_count(request):
         return JsonResponse({
             'status': 'id_not_found',
             'message': 'Invalid product ID or count',
-            # 'cart_total_price': current_cart.calculate_total()
 
         })
 

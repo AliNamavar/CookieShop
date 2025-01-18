@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,8 +46,7 @@ INSTALLED_APPS = [
     'article_module',
     'sorl.thumbnail',
     'order_module',
-    'favorite_module'
-
+    'favorite_module',
 ]
 
 MIDDLEWARE = [
@@ -92,14 +92,13 @@ WSGI_APPLICATION = 'cookie_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'project_db',          # نام دیتابیس
-        'USER': 'postgres',        # نام کاربر
-        'PASSWORD': '123',        # رمز عبور
-        'HOST': 'localhost',           # یا آدرس سرور دیتابیس
-        'PORT': '5432',                # پورت پیش‌فرض PostgreSQL
+        'NAME': 'project_db',  # نام دیتابیس
+        'USER': 'postgres',  # نام کاربر
+        'PASSWORD': '123',  # رمز عبور
+        'HOST': 'localhost',  # یا آدرس سرور دیتابیس
+        'PORT': '5432',  # پورت پیش‌فرض PostgreSQL
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -158,8 +157,57 @@ EMAIL_PORT = 587
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
 
-
 LOGIN_URL = '/login'
 
 SANDBOX = False
 MERCHANT = "XXXX-XXX-XXXX-XXX"
+
+JAZZMIN_SETTINGS = {
+    "site_title": "مدیریت سایت شیرینی‌فروشی",
+    "site_header": "پنل ادمین شیرینی‌فروشی",
+    "welcome_sign": "خوش آمدید به پنل مدیریت",
+    "show_sidebar": True,  # نمایش یا عدم نمایش سایدبار
+    "navigation_expanded": True,  # گسترش پیش‌فرض منو
+    "hide_apps": ["auth"],  # مخفی کردن اپلیکیشن‌ها
+    "hide_models": ["auth.User"],  # مخفی کردن مدل‌ها
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.User": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+    "order_with_respect_to": ["auth", "products"],  # ترتیب نمایش اپ‌ها
+    "custom_css": "/css/bootstrap-dark.css",  # مسیر فایل CSS دلخواه
+    "custom_js": None,  # مسیر فایل JS دلخواه
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-success",
+    "accent": "accent-teal",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-info",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "cyborg",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+}
