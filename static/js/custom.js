@@ -181,13 +181,6 @@ function fillpage(num) {
 
 }
 
-function check_address() {
-    var text = $('#id_address_address_check').val()
-    $.post('check-address', {address: text}).then(res => {
-        // if(res.status === 'success')
-    })
-
-}
 
 function addProductToFavorite(productId) {
     // console.log(productId)
@@ -202,8 +195,7 @@ function addProductToFavorite(productId) {
         }).then(confirm => {
             if (confirm.isConfirmed && res.status === 'not_auth') {
                 window.location.href = '/login';
-            }
-            else if(res.status === 'success'){
+            } else if (res.status === 'success') {
                 $(`#product-heart-${productId}`).addClass('active');
             }
             // else if (res.status === 'removed') {
@@ -248,4 +240,49 @@ function removeProductFavorite(ProductId) {
 }
 
 
+$(document).ready(function () {
+    $('#addressForm').on('submit', function (event) {
+        // جلوگیری از رفتار پیش‌فرض فرم
+        event.preventDefault();
 
+        // گرفتن URL از data-attribute فرم
+
+        // گرفتن مقدار آدرس از فیلد
+        var address = $('#id_address_address_check').val();
+
+        // ارسال درخواست AJAX
+        $.ajax({
+            url: '/check-address/', // URL ویو که در data-url فرم قرار داده شده
+            type: "POST",
+            headers: {
+                "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value // گرفتن CSRF Token از فرم
+            },
+            data: {
+                address: address
+            },
+            success: function (res) {
+                if (res.status === 'success') {
+                    Swal.fire({
+                        text: res.text || 'Operation completed successfully!',
+                        icon: res.icon || "success",
+                        confirmButtonText: res.confirmButtonTextBack || 'Ok'
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    text: "An error occurred while processing your request.",
+                    icon: "error",
+                    confirmButtonText: "Try Again"
+                });
+            }
+        });
+    });
+});
+
+setTimeout(function () {
+    var messageBox = document.getElementById('message-box');
+    if (messageBox) {
+        messageBox.style.display = 'none';
+    }
+}, 3000);

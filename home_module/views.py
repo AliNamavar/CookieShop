@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import TemplateView, ListView
@@ -15,6 +16,8 @@ from django.http import JsonResponse
 from django.views import View
 from django.template.loader import render_to_string
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
@@ -24,20 +27,17 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        context['settings']= site_settings.objects.filter(is_main_setting=True).first()
+        context['settings'] = site_settings.objects.filter(is_main_setting=True).first()
         context['sliders'] = site_slider.objects.filter(is_active=True)
         context['feedbacks'] = feedback_Model.objects.filter(satisfied=True).all().order_by('-created_date')
         context['form'] = feedbackForm()
         context['gallery'] = Gallery_Model.objects.filter(is_active=True).first()
         # context['products'] = Product.objects.filter(is_active=True, is_deleted=False).order_by('-id')[:8]
-        context['products'] = Product.objects.filter(is_active=True, is_deleted=False).annotate(visit_count=Count('productvisit')).order_by('-visit_count')[:8]
+        context['products'] = Product.objects.filter(is_active=True, is_deleted=False).annotate(
+            visit_count=Count('productvisit')).order_by('-visit_count')[:8]
         context['categories'] = productCategory.objects.filter(is_active=True).all()
 
         return context
-
-
-
-
 
 
 class SubmitFeedbackView(View):
@@ -72,9 +72,6 @@ class SubmitFeedbackView(View):
             'text': 'خطایی در ارسال نظر وجود دارد.',
             'icon': 'error',
         }, status=400)
-
-
-
 
 
 class AboutView(TemplateView):
@@ -116,10 +113,35 @@ def footer_component(request):
     return render(request, 'shared/footer_component.html', context)
 
 
+# class check_address(View):
+#     def get(self, request, *args, **kwargs):
+#         user = request.user
+#         context = {
+#             'user': user
+#         }
+#         return render(request, 'home_module/adrees_check.html', context)
+#
+#     def post(self, request, *args, **kwargs):
+#         new_address = request.POST.get('address')
+#         user_id = request.user.id
+#         user = User.objects.filter(id=user_id).first()
+#         user.address = new_address
+#         user.save()
+#         context = {
+#             'user': user
+#         }
+#         return JsonResponse({
+#             'status': 'success',
+#             'text': 'all right just wait for site complete paying!',
+#             'icon': 'success',
+#             'confirmButtonTextBack': 'Ok'
+#             # 'body': render_to_string('partials/check_address_partials.html', context)
+#         })
 
 
-
-class check_address(View):
+# @method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(login_required, name='dispatch')
+class CheckAddressView(View):
     def get(self, request, *args, **kwargs):
         user = request.user
         context = {
@@ -127,13 +149,22 @@ class check_address(View):
         }
         return render(request, 'home_module/adrees_check.html', context)
 
+
     def post(self, request, *args, **kwargs):
         new_address = request.POST.get('address')
-        user_id = request.user.id
-        user = User.objects.filter(id=user_id).first()
-        user.address = new_address
-        user.save()
-        context = {
-            'user': user
-        }
-        return render(request, 'home_module/adrees_check.html', context)
+        user = User.objects.filter(id=request.user.id).first()
+        if user:
+            user.address = new_address
+            user.save()
+            return JsonResponse({
+                'status': 'success',
+                'text': 'Address updated successfully! Wait For Our Paying Complete',
+                'icon': 'success',
+                'confirmButtonTextBack': 'Ok'
+            })
+        return JsonResponse({
+            'status': 'error',
+            'text': 'User not found.',
+            'icon': 'error',
+            'confirmButtonTextBack': 'Retry'
+        })

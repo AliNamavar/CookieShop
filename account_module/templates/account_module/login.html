@@ -11,14 +11,14 @@
                 {{ message }}
             {% endfor %}
         </div>
-        <script>
-            setTimeout(function () {
-                var messageBox = document.getElementById('message-box');
-                if (messageBox) {
-                    messageBox.style.display = 'none';
-                }
-            }, 3000);
-        </script>
+{#        <script>#}
+{#            setTimeout(function () {#}
+{#                var messageBox = document.getElementById('message-box');#}
+{#                if (messageBox) {#}
+{#                    messageBox.style.display = 'none';#}
+{#                }#}
+{#            }, 3000);#}
+{#        </script>#}
     {% endif %}
     <section class="checkout spad">
         <div class="container">
@@ -45,6 +45,7 @@
                                 </div>
                             </div>
                             <p>Don't have an account? <a href="{% url 'register' %}" class="custom-link">Create!</a></p>
+                            <p>Forgot Password? <a href="{% url 'ForgotPassword' %}" class="custom-link">Forgot!</a></p>
                             <button type="submit" class="site-btn">Login</button>
                             <div class="checkout__input">
                             </div>

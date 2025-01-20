@@ -1,0 +1,39 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}
+	Reset Password
+{% endblock %}
+
+{% block content %}
+	 
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <form method="post" action="{% url 'ForgotPassword' %}">
+{#                    <input type="hidden" name="csrfmiddlewaretoken" value="FGAG7R2ePy4C1lywj4CLqOQcVeaaDTeTyl1NOUkmd2pct2l3RSXjsLFear6FPgXk">#}
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <h6 class="checkout__title">Login To your Account</h6>
+{#                            <div class="row">#}
+{#                                <div class="col-lg-6">#}
+                                    <div class="checkout__input">
+                                        <p>Email<span>*</span></p>
+                                        {{ form.email }}
+                                        {{ form.email.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    
+                                </div>
+                            </div>
+                            <p>Don't have an account? <a href="/register" class="custom-link">Create!</a></p>
+                            <button type="submit" class="site-btn">Login</button>
+                            <div class="checkout__input">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -50,3 +50,9 @@ class LoginForm(forms.Form):
     )
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'checkout__input', 'placeholder': 'Password'}))
 
+class ForgotPasswordForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'Enter Your Email'
+        })
+    )
