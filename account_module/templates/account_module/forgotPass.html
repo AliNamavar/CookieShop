@@ -5,11 +5,12 @@
 {% endblock %}
 
 {% block content %}
-	 
+
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
                 <form method="post" action="{% url 'ForgotPassword' %}">
+                    {% csrf_token %}
 {#                    <input type="hidden" name="csrfmiddlewaretoken" value="FGAG7R2ePy4C1lywj4CLqOQcVeaaDTeTyl1NOUkmd2pct2l3RSXjsLFear6FPgXk">#}
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -23,10 +24,10 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    
+
                                 </div>
                             </div>
-                            <p>Don't have an account? <a href="/register" class="custom-link">Create!</a></p>
+{#                            <p>Don't have an account? <a href="/register" class="custom-link">Create!</a></p>#}
                             <button type="submit" class="site-btn">Login</button>
                             <div class="checkout__input">
                             </div>

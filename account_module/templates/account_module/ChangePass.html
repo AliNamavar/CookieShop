@@ -1,0 +1,60 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}
+    Change Your Password
+{% endblock %}
+
+{% block content %}
+    {% if messages %}
+        <div id="message-box" class="alert alert-success-custom overlay-message">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+{#        <script>#}
+{#            setTimeout(function () {#}
+{#                var messageBox = document.getElementById('message-box');#}
+{#                if (messageBox) {#}
+{#                    messageBox.style.display = 'none';#}
+{#                }#}
+{#            }, 3000);#}
+{#        </script>#}
+    {% endif %}
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <h6 class="checkout__title">Login To your Account</h6>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Password<span>*</span></p>
+                                        {{ form.Password }}
+                                        {{ form.Password.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Repeat Password<span>*</span></p>
+                                        {{ form.RepeatPassword }}
+                                        {{ form.RepeatPassword.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Don't have an account? <a href="{% url 'register' %}" class="custom-link">Create!</a></p>
+                            <p>Forgot Password? <a href="{% url 'ForgotPassword' %}" class="custom-link">Forgot!</a></p>
+                            <button type="submit" class="site-btn">Login</button>
+                            <div class="checkout__input">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

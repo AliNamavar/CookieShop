@@ -1,13 +1,18 @@
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
-from .forms import RegisterForm, ActivationCodeForm, LoginForm, ForgotPasswordForm
+from .forms import RegisterForm, ActivationCodeForm, LoginForm, ForgotPasswordForm, ResetPasswordForm
 from .models import User
 from django.utils.crypto import get_random_string
 from django.contrib.auth import login, logout
 from utils.email_service import send_email
-
+from django.contrib.auth.hashers import make_password
+from django.shortcuts import get_object_or_404
+from django.views.generic import FormView
+from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 # Create your views here.
 
 
@@ -139,9 +144,81 @@ class LoginView(View):
             'form': form
         })
 
-class ForgotPassView(View):
-    def get(self, request):
+# class ForgotPassView(View):
+#     def get(self, request):
+#         context = {
+#             'form': ForgotPasswordForm()
+#         }
+#         return render(request, 'account_module/forgotPass.html', context)
+#
+#     def post(self, request):
+#         form = ForgotPasswordForm(request.POST)
+#         if form.is_valid():
+#             email = form.cleaned_data['email']
+#             user:User = User.objects.filter(email__iexact=email).first()
+#             if user is None:
+#                 form.add_error('email', 'ایمیل وارد شده صحیح نمی باشد')
+#                 return render(request, 'account_module/forgotPass.html', context={
+#                     'form': form
+#                 })
+#             send_email(
+#                 to=email,
+#                 subject='Reset your password',
+#                 context={'form': form,'user': user},
+#                 template_name='send_mails/forgot_password_send.html'
+#
+#             )
+#
+#             messages.success(request, 'کد تایید به ایمل شما ارسال شد ایمیل خود را چک کنید')
+#             return redirect(reverse('home'))
+#
+#         return render(request, 'account_module/forgotPass.html', context={
+#             'form': form,
+#         })
+
+class ForgotPassView(SuccessMessageMixin, FormView):
+    template_name = 'account_module/forgotPass.html'
+    form_class = ForgotPasswordForm
+    success_url = reverse_lazy('home')
+    success_message = 'کد تایید به ایمیل شما ارسال شد. ایمیل خود را چک کنید.'
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        user = User.objects.filter(email__iexact=email).first()
+        if not user:
+            form.add_error('email', 'ایمیل وارد شده صحیح نمی‌باشد')
+            return self.form_invalid(form)
+
+
+        send_email(
+            to=email,
+            subject='Reset your password',
+            context={'form': form, 'user': user},
+            template_name='send_mails/forgot_password_send.html'
+        )
+        return super().form_valid(form)
+
+
+def ChangePass(request, email_active_code):
+    # user = User.objects.filter(email_active_code__iexact=email_active_code).first()
+    user = get_object_or_404(User, email_active_code=email_active_code)
+    if user is None:
+        return HttpResponse('Ops Invalid code!')
+
+
+    if request.method == 'POST':
+        form = ResetPasswordForm(request.POST)
+        if form.is_valid():
+            new_pass = form.cleaned_data['Password']
+            user.password = make_password(new_pass)
+            user.email_active_code = get_random_string(8)
+            user.save()
+            messages.success(request, 'pass شما با موفقیت تغییر کرد ')
+            return redirect(reverse('login'))
+
+    else:
         context = {
-            'form': ForgotPasswordForm()
+            'form': ResetPasswordForm(),
         }
-        return render(request, 'account_module/forgotPass.html', context)
+        return render(request, 'account_module/ChangePass.html', context)
+
