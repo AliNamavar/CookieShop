@@ -180,7 +180,7 @@ class ForgotPassView(SuccessMessageMixin, FormView):
     template_name = 'account_module/forgotPass.html'
     form_class = ForgotPasswordForm
     success_url = reverse_lazy('home')
-    success_message = 'کد تایید به ایمیل شما ارسال شد. ایمیل خود را چک کنید.'
+    success_message = 'reset password link send to your email'
 
     def form_valid(self, form):
         email = form.cleaned_data['email']
@@ -200,10 +200,9 @@ class ForgotPassView(SuccessMessageMixin, FormView):
 
 
 def ChangePass(request, email_active_code):
-    # user = User.objects.filter(email_active_code__iexact=email_active_code).first()
     user = get_object_or_404(User, email_active_code=email_active_code)
-    if user is None:
-        return HttpResponse('Ops Invalid code!')
+    # if user is None:
+    #     return HttpResponse('Ops Invalid code!')
 
 
     if request.method == 'POST':
@@ -215,7 +214,9 @@ def ChangePass(request, email_active_code):
             user.save()
             messages.success(request, 'pass شما با موفقیت تغییر کرد ')
             return redirect(reverse('login'))
-
+        return render(request, 'account_module/ChangePass.html', context={
+            'form': form
+        })
     else:
         context = {
             'form': ResetPasswordForm(),

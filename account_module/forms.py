@@ -28,7 +28,8 @@ class RegisterForm(forms.Form):
         password = cleaned_data.get("password")
         repeat_password = cleaned_data.get("repeat_password")
         if password != repeat_password:
-            raise forms.ValidationError("Passwords don't match")
+             self.add_error('email', "Passwords don't match")
+
         return cleaned_data
 
 
@@ -67,9 +68,9 @@ class ResetPasswordForm(forms.Form):
     )
     def clean(self):
         cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        repeat_password = cleaned_data.get("repeat_password")
+        password = cleaned_data.get("Password")
+        repeat_password = cleaned_data.get("RepeatPassword")
         if password != repeat_password:
-            raise forms.ValidationError("Passwords don't match")
+            self.add_error('Password', "Passwords don't match")
 
         return cleaned_data
