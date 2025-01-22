@@ -2,6 +2,7 @@ import json
 import requests
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.db.models import Prefetch
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
@@ -130,8 +131,13 @@ def add_to_cart(request):
 
 @login_required
 def cart_view(request):
-    current_order, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(is_paid=False,
+    current_order, created = Order.objects.c('orderdetail_set').get_or_create(is_paid=False,
                                                                                              user=request.user)
+
+    # current_order, created = Order.objects.prefetch_related(Prefetch(
+    #     'orderdetail_set',
+    #     queryset=OrderDetail.objects.order_by('id')
+    # )).get_or_create(is_paid=False, user=request.user)
     total_price = current_order.calculate_total()
 
     context = {
@@ -140,6 +146,7 @@ def cart_view(request):
     }
 
     return render(request, 'order_module/cart_list.html', context)
+
 
 @login_required
 def remove_order_detail(request):
@@ -171,7 +178,6 @@ def remove_order_detail(request):
         'body': render_to_string('cart_partials/cart_list_partials.html', context),
         'cart_total_price': current_order.calculate_total()
 
-
     })
 
 
@@ -189,7 +195,7 @@ def update_cart_product_count(request):
 
     current_order, created = Order.objects.get_or_create(is_paid=False, user=request.user)
     detail = OrderDetail.objects.filter(pk=product_id, order__user_id=request.user.id,
-                                                   order__is_paid=False).first()
+                                        order__is_paid=False).first()
 
     if detail is None:
         return JsonResponse({
@@ -205,7 +211,6 @@ def update_cart_product_count(request):
 
     detail.count = count
     detail.save()
-
 
     context = {
         'order': current_order,

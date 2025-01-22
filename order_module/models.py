@@ -43,3 +43,4 @@ class OrderDetail(models.Model):
     class Meta:
         verbose_name = 'cart shop detail'
         verbose_name_plural = 'cart shop details list'
+        ordering = ['id']
