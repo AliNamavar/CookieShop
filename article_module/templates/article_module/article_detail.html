@@ -1,0 +1,155 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}
+    article | {{ article.title }}
+{% endblock %}
+
+{% block content %}
+    <!-- Blog Hero Begin -->
+    <div class="blog-hero set-bg" data-setbg="{{ article.image.url }}">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-7">
+                    <div class="blog__hero__text">
+                        <div class="label">Recipes</div>
+                        <h2>{{ article.title }}</h2>
+                        <ul>
+                            <li>By <span>{{ article.author.username }}</span></li>
+                            <li>{{ article.created_date }}</li>
+                            {#                            <li>112 Views</li>#}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog Hero End -->
+
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <div class="blog__details__content">
+                        <div class="blog__details__text">
+                            <p>{{ article.short_description }}</p>
+                        </div>
+                        <hr class="divider">
+                        <div class="blog__details__recipe__details">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="blog__details__ingredients">
+                                        <h6>Ingredients</h6>
+                                        <ul>
+                                            <li><span>.</span>{{ article.description }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="blog__details__ingredients__pic">
+                                        {% if article.image_detail_one and article.image_detail_two %}
+                                            <img src="{{ article.image_detail_one.url }}" alt="">
+                                            <div style="height: 20px;"></div>
+                                            <img src="{{ article.image_detail_two.url }}" alt="">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="blog__details__author">
+                            <div class="blog__details__author__pic">
+                                {#                                <img src="/static/img/blog/details/blog-author.jpg" alt="">#}
+
+                            </div>
+                            <div class="blog__details__author__text">
+                                {#                                <p class="article-author-label">author:</p>#}
+                                <h6 class="article-author-name">{{ article.author.username }}</h6>
+                                <div class="blog__details__author__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                </div>
+                                <p class="article-description">{{ article.author.about_user }}</p>
+                            </div>
+                        </div>
+
+                        <div id="comments-section">
+                            <div class="blog__details__comment">
+                                <h5>{{ comment_count }} Comment</h5>
+                                {% if request.user.is_authenticated %}
+                                    <a onclick="scrollToForm(event)" href="#" class="primary-btn">Leave a comment</a>
+                                {% endif %}
+                                {% for comment in comments %}
+                                    <div class="blog__details__comment__item">
+
+                                        <div class="blog__details__comment__item__pic">
+                                            {% if comment.user.avatar %}
+                                                <img src="{{ comment.user.avatar.url }}" alt="">
+                                            {% endif %}
+                                        </div>
+                                        <div class="blog__details__comment__item__text">
+                                            <h6>{{ comment.user.username }}</h6>
+                                            <span>{{ comment.created_date }}</span>
+                                            <p>{{ comment.comment }}</p>
+                                            <div class="blog__details__comment__btns">
+                                                <a onclick="fillpatternid({{ comment.id }}, event)"
+                                                   href="#">Reply</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if comment.article_comments_set.all %}
+                                        {% for sub_com in comment.article_comments_set.all %}
+                                            <div class="blog__details__comment__item blog__details__comment__item--reply">
+                                                <div class="blog__details__comment__item__text">
+                                                    <h6>{{ sub_com.user.username }}</h6>
+                                                    <span>{{ sub_com.created_date }}</span>
+                                                    <p>{{ sub_com.comment }}</p>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                        <hr>
+                        <br>
+                        {% if request.user.is_authenticated %}
+                            <form method="post" action="{% url 'article-comment' %}" id="commentForm"
+                                  hx-post="{% url 'article-comment' %}" hx-target="#comments-section"
+                                  hx-swap="innerHTML">
+                                {% csrf_token %}
+                                <div class="checkout__input">
+                                    <p>Leave a comment<span>*</span></p>
+                                    {{ form.message }}
+                                </div>
+                                <input type="hidden" id="parent_id" value="" name="articleparentId">
+                                <input type="hidden" value="{{ article.id }}" name="articleid">
+                                <div id="success-message"></div>
+                                <button type="submit" class="site-btn">Submit</button>
+                                {% if messages %}
+                                    <div id="message-box" class="alert alert-success-custom overlay-message">
+                                        {% for message in messages %}
+                                            {{ message }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </form>
+
+                        {% else %}
+                            <div class="alert alert-danger">
+                                <p> برای درج نظر اول<a href="{% url 'login' %}"> لاگ این</a> کنید </p>
+                            </div>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+{% endblock %}

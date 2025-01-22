@@ -1,0 +1,126 @@
+{% extends 'shared/layout.html' %}
+
+{% block title %}
+    products
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Shop</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__links">
+                        <a href=".{% url 'home' %}">Home</a>
+                        <span>Shop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+    <!-- Shop Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+            <div class="shop__option">
+                <div class="row">
+                    <div class="col-lg-7 col-md-7">
+                        <div class="shop__option__search">
+                            <form method="get" action="">
+                                <select name="category" onchange="this.form.submit()">
+                                    <option value="">Categories</option>
+                                    {% for category in categorise %}
+                                        <option value="{{ category.url }}"
+                                                {% if category.url == request.GET.category %}selected{% endif %}>
+                                            {{ category.title }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                <input type="text" name="search" placeholder="Search" value="{{ search_query }}">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5">
+                        <div class="shop__option__right">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% if products %}
+
+                    {% for product in products %}
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{{ product.image.url }}">
+                                    <div class="product__label">
+                                        <span>{{ product.title }}</span>
+                                    </div>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="#">{{ product.short_description }}</a></h6>
+                                    <div class="product__item__price">${{ product.price }}</div>
+                                    <div class="cart_add">
+                                        <a href="#">Add to cart</a>&nbsp;
+                                        <a href="{% url 'product-detail' slug=product.slug %}">See Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center">
+                        <p class="no-products-message">No products found matching your search.</p>
+                    </div>
+                {% endif %}
+                <div class="row">
+                </div>
+
+
+            </div>
+
+
+            <div class="shop__last__option">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="shop__pagination">
+                            {% if page_obj.has_previous %}
+                                <a onclick="fillpage({{ page_obj.previous_page_number }})"><span
+                                        class="arrow_carrot-left"></span></a>
+                            {% endif %}
+                            {% for page_num in page_obj.paginator.page_range %}
+                                <a onclick="fillpage({{ page_num }})"
+                                   href="#" class="{% if page_obj.number == page_num %}
+                               active {% endif %}">{{ page_num }}</a>
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <a onclick="fillpage({{ page_obj.next_page_number }})"><span
+                                        class="arrow_carrot-right"></span></a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <form method="get" action="#" id="form-fill-page">
+                        <input type="hidden" value="" name="page" id="input-page-fill">
+                    </form>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="shop__last__text">
+                            <p>Showing 1-8 of {{ product_count }} results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

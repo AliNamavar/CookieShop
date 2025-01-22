@@ -1,0 +1,34 @@
+        <section class="checkout spad">
+            <div class="container">
+                <div class="checkout__form">
+                    <form method="post" action="{% url  'check_address' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-8 col-md-6">
+                                <h6 class="checkout__title">Check your address</h6>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        {#                                    <div class="checkout__input">#}
+                                        {#                                        <p>Address<span>*</span></p>#}
+                                        {#                                        {{ form.address }}#}
+                                        {#                                        {{ form }}#}
+                                        {#                                        {{ form.email.errors }}#}
+                                        {#                                    </div>#}
+                                        <div class="checkout__input">
+                                            <p>Address<span>*</span></p>
+                                            <input type="text" name="address" class="checkout__input__add"
+                                                   placeholder="Street Address" required id="id_address_address_check"
+                                                   value="{{ user.address }}">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <button type="submit" class="site-btn">ادامه</button>
+                                <div class="checkout__input">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>

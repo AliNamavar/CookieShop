@@ -1,0 +1,49 @@
+<div id="comments-section">
+
+    <div class="blog__details__comment">
+        <h5>{{ count }} Comment</h5>
+        <a onclick="scrollToForm(event)" href="#" class="primary-btn" id="leave-acs">Leave a comment</a>
+        {% for comment in comments %}
+            <div class="blog__details__comment__item">
+                <div class="blog__details__comment__item__pic">
+                    {% if comment.user.avatar %}
+                        <img src="{{ comment.user.avatar.url }}" alt="">
+                    {% endif %}
+                </div>
+                <div class="blog__details__comment__item__text">
+                    <h6>{{ comment.user.username }}</h6>
+                    <span>{{ comment.created_date }}</span>
+                    <p>{{ comment.comment }}</p>
+                    <div class="blog__details__comment__btns">
+                        <a onclick="fillpatternid({{ comment.id }}, event)" href="#">Reply</a>
+                    </div>
+                </div>
+            </div>
+            {% if comment.article_comments_set.all %}
+                {% for sub_com in comment.article_comments_set.all %}
+                    <div class="blog__details__comment__item blog__details__comment__item--reply">
+                        <div class="blog__details__comment__item__text">
+                            <h6>{{ sub_com.user.username }}</h6>
+                            <span>{{ sub_com.created_date }}</span>
+                            <p>{{ sub_com.comment }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        <div class="alert alert-success">
+            {{ success_massage }}
+        </div>
+
+
+    </div>
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form" method="get" action="{% url 'product-list' %}">
+                <input type="text" name="search" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+</div>

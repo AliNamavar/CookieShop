@@ -1,0 +1,134 @@
+{% extends 'shared/layout.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    about
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>About</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__links">
+                        <a href=".{% url 'home' %}">Home</a>
+                        <span>About</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- About Section Begin -->
+    <section class="about spad">
+        <div class="container">
+            {#            <div class="row">#}
+            {#                <div class="col-lg-12">#}
+            {#                    <div class="about__video set-bg" data-setbg="/static/img/about-video.jpg">#}
+            {#                        <a href="https://www.youtube.com/watch?v=8PJ3_p7VqHw&list=RD8PJ3_p7VqHw&start_radio=1"#}
+            {#                        class="play-btn video-popup"><i class="fa fa-play"></i></a>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {#            </div>#}
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="about__text">
+                        <div class="section-title">
+                            <span>About {{ settings.name }}</span>
+                            <h2> {{ settings.short_description }}</h2>
+                        </div>
+                        <p>{{ settings.about_text }}</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="about__bar">
+                        <div class="about__bar__item">
+                            <p>Cake design</p>
+                            <div id="bar1" class="barfiller">
+                                <div class="tipWrap"><span class="tip"></span></div>
+                                <span class="fill" data-percentage="95"></span>
+                            </div>
+                        </div>
+                        <div class="about__bar__item">
+                            <p>Cake Class</p>
+                            <div id="bar2" class="barfiller">
+                                <div class="tipWrap"><span class="tip"></span></div>
+                                <span class="fill" data-percentage="80"></span>
+                            </div>
+                        </div>
+                        <div class="about__bar__item">
+                            <p>Cake Recipes</p>
+                            <div id="bar3" class="barfiller">
+                                <div class="tipWrap"><span class="tip"></span></div>
+                                <span class="fill" data-percentage="90"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Section End -->
+
+    <!-- Testimonial Section Begin -->
+    <section class="testimonial spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <span>Testimonial</span>
+                        <h2>Our client say</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="testimonial__slider owl-carousel">
+{#                                    <div class="testimonial__slider owl-carousel">#}
+
+                    {% for feedback in feedbacks %}
+                        <div class="col-lg-6">
+                            <div class="testimonial__item">
+                                <div class="testimonial__author">
+                                    <div class="testimonial__author__pic">
+                                        {#                                <img src="/static/img/testimonial/ta-1.jpg" alt="">#}
+                                    </div>
+                                    <div class="testimonial__author__text">
+                                        <h5>{{ feedback.author.username }}</h5>
+                                        {#                                <span>New york</span>#}
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    {% for i in 5|custom_range %}
+                                        {% if i < feedback.rating %}
+                                            <span class="icon_star"></span>
+                                        {% else %}
+                                            <span class="icon_star_alt"></span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+
+
+                                <p>{{ feedback.feedback }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+{% endblock %}

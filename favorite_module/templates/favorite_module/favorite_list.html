@@ -1,0 +1,14 @@
+{% extends 'shared/layout.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    wishlist
+{% endblock %}
+
+{% block content %}
+    <div id="ajax_rm_favorite_product">
+
+    {% include 'favorite_partial/success_favorite_rm.html' %}
+    </div>
+
+{% endblock %}
