@@ -12,7 +12,7 @@ from .models import Article, ArticleCategory, article_comments, ArticleVisited
 from django.contrib.messages import get_messages
 
 # Create your views here.
-
+#test bady
 class ArticleListView(ListView):
     model = Article
     template_name = 'article_module/article_list.html'
