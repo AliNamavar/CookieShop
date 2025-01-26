@@ -125,6 +125,7 @@
                                 <div class="checkout__input">
                                     <p>Leave a comment<span>*</span></p>
                                     {{ form.message }}
+                                    {{ form.message.errors }}
                                 </div>
                                 <input type="hidden" id="parent_id" value="" name="articleparentId">
                                 <input type="hidden" value="{{ article.id }}" name="articleid">
