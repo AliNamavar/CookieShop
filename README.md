@@ -33,7 +33,7 @@ Here are some snapshots of the project to give you a better idea of its features
 
 ### Shopping Cart
 
-![Shopping Cart](/static/img/github_images/IMG_20250126_133040.jpg "Shopping Cart")
+![Shopping Cart](/static/img/github_images/cart.png "Shopping Cart")
 > An Ajax-powered cart for a seamless shopping experience.
 
 ---
