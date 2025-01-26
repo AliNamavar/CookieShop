@@ -23,12 +23,12 @@ Here are some snapshots of the project to give you a better idea of its features
 
 ### Home Page
 
-![Home Page](/static/img/github_images/IMG_20250126_133116.jpg "Home Page")
+![Home Page](/static/img/github_images/home.png "Home Page")
 > A clean and welcoming homepage for users to browse products.
 
 ### Admin Dashboard
 
-![Admin Dashboard](/static/img/github_images/IMG_20250126_133020.jpg "Admin Dashboard")
+![Admin Dashboard](/static/img/github_images/Admin.png "Admin Dashboard")
 > Powerful tools for managing the shop, including products, orders, and users.
 
 ### Shopping Cart
