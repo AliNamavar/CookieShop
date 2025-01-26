@@ -23,17 +23,17 @@ Here are some snapshots of the project to give you a better idea of its features
 
 ### Home Page
 
-![Home Page](/static/img/github_images/Screenshot%20from%202025-01-22%2013-53-06.png "Home Page")
+![Home Page](/static/img/github_images/IMG_20250126_133116.jpg "Home Page")
 > A clean and welcoming homepage for users to browse products.
 
 ### Admin Dashboard
 
-![Admin Dashboard](/static/img/github_images/Screenshot%20from%202025-01-26%2012-38-47.png "Admin Dashboard")
+![Admin Dashboard](/static/img/github_images/IMG_20250126_133020.jpg "Admin Dashboard")
 > Powerful tools for managing the shop, including products, orders, and users.
 
 ### Shopping Cart
 
-![Shopping Cart](/static/img/github_images/Screenshot%20from%202025-01-22%2014-40-38.png "Shopping Cart")
+![Shopping Cart](/static/img/github_images/IMG_20250126_133040.jpg "Shopping Cart")
 > An Ajax-powered cart for a seamless shopping experience.
 
 ---
