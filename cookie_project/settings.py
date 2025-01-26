@@ -92,11 +92,11 @@ WSGI_APPLICATION = 'cookie_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'project_db',  # نام دیتابیس
-        'USER': 'postgres',  # نام کاربر
-        'PASSWORD': '123',  # رمز عبور
-        'HOST': 'localhost',  # یا آدرس سرور دیتابیس
-        'PORT': '5432',  # پورت پیش‌فرض PostgreSQL
+        'NAME': 'project_db',
+        'USER': 'postgres',
+        'PASSWORD': '123',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -166,18 +166,18 @@ JAZZMIN_SETTINGS = {
     "site_title": "مدیریت سایت شیرینی‌فروشی",
     "site_header": "پنل ادمین شیرینی‌فروشی",
     "welcome_sign": "خوش آمدید به پنل مدیریت",
-    "show_sidebar": True,  # نمایش یا عدم نمایش سایدبار
-    "navigation_expanded": True,  # گسترش پیش‌فرض منو
-    "hide_apps": ["auth"],  # مخفی کردن اپلیکیشن‌ها
-    "hide_models": ["auth.User"],  # مخفی کردن مدل‌ها
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": ["auth"],
+    "hide_models": ["auth.User"],
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.User": "fas fa-user",
         "auth.Group": "fas fa-users",
     },
-    "order_with_respect_to": ["auth", "products"],  # ترتیب نمایش اپ‌ها
-    "custom_css": "/css/bootstrap-dark.css",  # مسیر فایل CSS دلخواه
-    "custom_js": None,  # مسیر فایل JS دلخواه
+    "order_with_respect_to": ["auth", "products"],
+    "custom_css": "/css/bootstrap-dark.css",
+    "custom_js": None,
 }
 
 JAZZMIN_UI_TWEAKS = {

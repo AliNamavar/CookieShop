@@ -201,8 +201,6 @@ class ForgotPassView(SuccessMessageMixin, FormView):
 
 def ChangePass(request, email_active_code):
     user = get_object_or_404(User, email_active_code=email_active_code)
-    # if user is None:
-    #     return HttpResponse('Ops Invalid code!')
 
 
     if request.method == 'POST':
