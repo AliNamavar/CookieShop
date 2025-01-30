@@ -164,7 +164,7 @@ def remove_order_detail(request):
         })
 
     current_order, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(is_paid=False,
-                                                                                             user=request.user)
+                                                                                            user=request.user)
 
     total_price = current_order.calculate_total()
 
