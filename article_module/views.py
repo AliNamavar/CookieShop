@@ -23,6 +23,7 @@ class ArticleListView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['categorys'] = ArticleCategory.objects.filter(is_active=True).annotate(article_count=Count('article'))
+        context['search_query'] = self.request.GET.get('article_search', '')
         return context
 
     def get_queryset(self):

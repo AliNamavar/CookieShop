@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-     <!-- Page Preloder -->
+    <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -33,29 +33,39 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    {% for Article in Articles %}
-                        <div class="blog__item">
-                            {% thumbnail Article.image "690x385" crop='center' quality=95 as im %}
-                                <div class="blog__item__pic set-bg" data-setbg="{{ im.url }}">
-                            {% endthumbnail %}
-                            <div class="blog__pic__inner">
+                    {% if Articles %}
 
-                                <div class="label">Recipes</div>
-                                <ul>
-                                    {#                                    <li>By <span>James Myers</span></li>#}
-                                    <li>By <span> {{ Article.author.username }} </span></li>
-                                    <li> {{ Article.created_date }} </li>
-                                    {#                                    <li>112 Views</li>#}
-                                </ul>
+
+                        {% for Article in Articles %}
+                            <div class="blog__item">
+                                {% thumbnail Article.image "690x385" crop='center' quality=95 as im %}
+                                    <div class="blog__item__pic set-bg" data-setbg="{{ im.url }}">
+                                {% endthumbnail %}
+                                <div class="blog__pic__inner">
+
+                                    <div class="label">Recipes</div>
+                                    <ul>
+                                        {#                                    <li>By <span>James Myers</span></li>#}
+                                        <li>By <span> {{ Article.author.username }} </span></li>
+                                        <li> {{ Article.created_date }} </li>
+                                        {#                                    <li>112 Views</li>#}
+                                    </ul>
+                                </div>
+                                </div>
+                                <div class="blog__item__text">
+                                    <h2>{{ Article.title }}</h2>
+                                    <p>{{ Article.short_description }}</p>
+                                    <a href="{% url 'article-Detail' pk=Article.id %}">READ MORE</a>
+                                </div>
                             </div>
-                            </div>
-                            <div class="blog__item__text">
-                                <h2>{{ Article.title }}</h2>
-                                <p>{{ Article.short_description }}</p>
-                                <a href="{% url 'article-Detail' pk=Article.id %}">READ MORE</a>
-                            </div>
+                        {% endfor %}
+                    {% else %}
+
+                        <div class="col-12 text-center">
+                            <p class="no-products-message">No Blog found matching your search.</p>
                         </div>
-                    {% endfor %}
+                        
+                    {% endif %}
 
                     <div class="shop__pagination">
                         {% if page_obj.has_previous %}
@@ -74,14 +84,15 @@
 
                     </div>
                 </div>
-                <form method="get" action="#"  id="form-fill-page">
+                <form method="get" action="#" id="form-fill-page">
                     <input type="hidden" value="" name="page" id="input-page-fill">
                 </form>
                 <div class="col-lg-4">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
                             <form action="" method="get">
-                                <input type="text" name="article_search" placeholder="Enter keyword">
+                                <input type="text" name="article_search" placeholder="Enter keyword"
+                                       value="{{ search_query }}">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
