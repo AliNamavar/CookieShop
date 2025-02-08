@@ -31,7 +31,8 @@
                 <div class="row">
                     <div class="col-lg-7 col-md-7">
                         <div class="shop__option__search">
-                            <form method="get" action="">
+                            <form method="get" action="" id="cate-serch-page">
+                                <input type="hidden" value="" name="page" id="input-page-fill">
                                 <select name="category" onchange="this.form.submit()">
                                     <option value="">Categories</option>
                                     {% for category in categorise %}
@@ -54,8 +55,8 @@
                     </div>
                 </div>
             </div>
-        
-        
+
+
             {% include 'products_includes/product_include.html' %}
 
 
@@ -79,9 +80,6 @@
 
                         </div>
                     </div>
-                    <form method="get" action="#" id="form-fill-page">
-                        <input type="hidden" value="" name="page" id="input-page-fill">
-                    </form>
 
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="shop__last__text">

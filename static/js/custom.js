@@ -176,14 +176,47 @@ $(document).ready(function () {
 
 function fillpage(num) {
     $('#input-page-fill').val(num)
-    $('#form-fill-page').submit();
+    $('#cate-serch-page').submit();
 
 
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    var form = document.getElementById('cate-serch-page');
+    if (form) {
+
+        var originalSubmit = form.submit;
+
+
+        form.submit = function() {
+            cleanForm(form);
+            originalSubmit.call(form);
+        };
+
+        form.addEventListener('submit', function(e) {
+            cleanForm(form);
+        });
+    }
+});
+
+function cleanForm(form) {
+    var inputs = form.querySelectorAll('input[name]');
+    inputs.forEach(function(input) {
+        if (input.value.trim() === '') {
+            input.removeAttribute('name');
+        }
+    });
+
+    var selects = form.querySelectorAll('select[name]');
+    selects.forEach(function(select) {
+        if (select.value.trim() === '') {
+            select.removeAttribute('name');
+        }
+    });
+}
+
 
 function addProductToFavorite(productId) {
-    // console.log(productId)
     $.get('/add-product-to-favorite?products_id=' + productId).then(res => {
         console.log(res)
         swal.fire({
@@ -198,9 +231,6 @@ function addProductToFavorite(productId) {
             } else if (res.status === 'success') {
                 $(`#product-heart-${productId}`).addClass('active');
             }
-            // else if (res.status === 'removed') {
-            // // حذف کردن کلاس active
-            // $(`#product-heart-${productId}`).removeClass('active');
 
         })
 
