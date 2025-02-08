@@ -1,0 +1,34 @@
+<div class="row">
+    {% if products %}
+
+        {% for product in products %}
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="{{ product.image.url }}">
+                        <div class="product__label">
+                            <span>{{ product.title }}</span>
+                        </div>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">{{ product.short_description }}</a></h6>
+                        <div class="product__item__price">${{ product.price }}</div>
+                        <div class="cart_add">
+                            <a href="#" onclick="addProductToCart({{ product.id }})" >Add to cart</a>&nbsp;
+                            <a href="{% url 'product-detail' slug=product.slug %}">See Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        {% endfor %}
+    {% else %}
+        <div class="col-12 text-center">
+            <p class="no-products-message">No products found matching your search.</p>
+        </div>
+    {% endif %}
+    <div class="row">
+    </div>
+
+
+</div>
