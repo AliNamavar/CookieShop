@@ -131,8 +131,10 @@ def add_to_cart(request):
 
 @login_required
 def cart_view(request):
-    current_order, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(is_paid=False,
-                                                                                             user=request.user)
+    current_order, created = Order.objects.prefetch_related(
+        Prefetch('orderdetail_set', queryset=OrderDetail.objects.filter(product__is_active=True))).get_or_create(
+        is_paid=False,
+        user=request.user)
 
     # current_order, created = Order.objects.prefetch_related(Prefetch(
     #     'orderdetail_set',
