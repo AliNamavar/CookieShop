@@ -1,4 +1,4 @@
-F<header class="header">
+<header class="header">
     <div class="header__top">
         <div class="container">
             <div class="row">
@@ -40,7 +40,7 @@ F<header class="header">
                             </div>
                             <div class="header__top__right__cart" id="cartPriceAjax">
                                 <a href="{% url 'cart_detail' %}"><img src="/static/img/icon/cart.png" alt="">
-                                    <span>0</span></a>
+                                    <span></span></a>
                                 <div class="cart__price">Cart: <span>${{ total_price }}</span></div>
                             </div>
                         </div>
@@ -61,17 +61,16 @@ F<header class="header">
                                 href="{% url 'about' %}">About</a></li>
                         <li class="{% if request.resolver_match.url_name == 'product-list' %}active{% endif %}"><a
                                 href="{% url 'product-list' %}">Shop</a></li>
-                            <li><a href="{% url 'home' %}  ">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="{% url 'product-list' %}">Shop</a></li>
-                                    <li><a href="{% url 'cart_detail' %}">Cart</a></li>
-                                    <li><a href="{% url 'oldOrders' %}">PreviesOrders</a></li>
-                                    <li><a href="{% url 'favorite_list' %}">Wisslist</a></li>
-                                    <li><a href="{% url 'article-list' %}">Blog</a></li>
-                                </ul>
-                            </li>
-                        <li><a href="{% url 'article-list' %}">Blog</a></li>
-                        {#                            <li><a href="./contact.html">Contact</a></li>#}
+                        <li><a href="{% url 'home' %}  ">Pages</a>
+                            <ul class="dropdown">
+                                <li><a href="{% url 'product-list' %}">Shop</a></li>
+                                <li><a href="{% url 'cart_detail' %}">Cart</a></li>
+                                <li><a href="{% url 'oldOrders' %}">PreviesOrders</a></li>
+                                <li><a href="{% url 'favorite_list' %}">Wisslist</a></li>
+                                <li><a href="{% url 'article-list' %}">Blog</a></li>
+                            </ul>
+                        </li>
+                        <li class="{% if request.resolver_match.url_name in 'article-list article-category' %} active {% endif %}"><a href="{% url 'article-list' %}">Blog</a></li>
                         <li class="{% if request.resolver_match.url_name == 'contact-us' %}active{% endif %}"><a
                                 href="{% url 'contact-us' %}">Contact Us</a></li>
                     </ul>

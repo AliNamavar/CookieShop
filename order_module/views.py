@@ -77,11 +77,24 @@ def verify_payment(authority):
 
 def add_to_cart(request):
     product_id = request.GET.get('product_id')
-    count = int(request.GET.get('count'))
+    count = request.GET.get('count')
 
     if request.user.is_authenticated:
-
         product = Product.objects.filter(pk=product_id, is_active=True).first()
+        if product is None:
+            return JsonResponse({
+                'status': '404',
+                'text': 'محصول مورد نظر یافت نشد',
+                'confirmButtonTextBack': 'باشه',
+                'icon': 'error'
+
+            })
+
+        try:
+            count = int(count)
+        except (TypeError, ValueError):
+            count = product.number
+
         if count < product.number:
             return JsonResponse({
                 'status': 'count_prob',
@@ -90,36 +103,29 @@ def add_to_cart(request):
                 'icon': 'error'
 
             })
-        if product is not None:
-            current_cart, created = Order.objects.get_or_create(is_paid=False, user=request.user)
-            current_cart_product = current_cart.orderdetail_set.filter(product_id=product_id).first()
 
-            if current_cart_product is not None:
-                current_cart_product.count += int(count)
-                current_cart_product.save()
-            else:
-                new_detail = OrderDetail(
-                    order_id=current_cart.id,
-                    product_id=product_id,
-                    count=count,
-                )
-                new_detail.save()
+        current_cart, created = Order.objects.get_or_create(is_paid=False, user=request.user)
+        current_cart_product = current_cart.orderdetail_set.filter(product_id=product_id).first()
 
-            return JsonResponse({
-                'status': 'success',
-                'text': 'محصول با موفقیت به سبد خرید شما اضافه شد',
-                'confirmButtonTextBack': 'باشه',
-                'icon': 'success',
-                'cart_total_price': current_cart.calculate_total()
-            })
+        if current_cart_product is not None:
+            current_cart_product.count += int(count)
+            current_cart_product.save()
         else:
-            return JsonResponse({
-                'status': '404',
-                'text': 'محصول مورد نظر یافت نشد',
-                'confirmButtonTextBack': 'باشه',
-                'icon': 'error'
+            new_detail = OrderDetail(
+                order_id=current_cart.id,
+                product_id=product_id,
+                count=count,
+            )
+            new_detail.save()
 
-            })
+        return JsonResponse({
+            'status': 'success',
+            'text': 'محصول با موفقیت به سبد خرید شما اضافه شد',
+            'confirmButtonTextBack': 'باشه',
+            'icon': 'success',
+            'cart_total_price': current_cart.calculate_total()
+        })
+
     return JsonResponse({
         'status': 'not_auth',
         'text': 'برای اضافه کردنه محصول به سبد خرید میبایست اول وارد سایت شوید',

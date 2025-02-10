@@ -18,7 +18,7 @@ from django.db.models import Q
 class ProductListView(ListView):
     template_name = 'product_module/product_list.html'
     model = Product
-    paginate_by = 8
+    paginate_by = 1
     context_object_name = 'products'
 
     def get_queryset(self):

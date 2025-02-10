@@ -6,27 +6,12 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Page Preloder -->
-    {#    <div id="preloder">#}
-    {#        <div class="loader"></div>#}
-    {#    </div>#}
-    {#    #}
-    <!-- Hero Section Begin -->
     {% if messages %}
         <div id="message-box" class="alert alert-success-custom overlay-message">
             {% for message in messages %}
                 {{ message }}
             {% endfor %}
         </div>
-{#        <script>#}
-{#            // مخفی کردن پیام بعد از 3 ثانیه#}
-{#            setTimeout(function () {#}
-{#                var messageBox = document.getElementById('message-box');#}
-{#                if (messageBox) {#}
-{#                    messageBox.style.display = 'none';#}
-{#                }#}
-{#            }, 3000); // زمان بر حسب میلی‌ثانیه#}
-{#        </script>#}
     {% endif %}
     <section class="hero">
         <div class="hero__slider owl-carousel">
@@ -237,8 +222,8 @@
                         <h5>
                             <i class="fa fa-instagram"></i>
                             <a class="instagram-link"
-                               href="https://www.instagram.com/r.namavar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
-                                @r.namavar
+                               href="https://www.instagram.com/">
+                                @instagramID
                             </a>
                         </h5>
 
@@ -300,8 +285,7 @@
             </div>
         </div>
         <div class="map__iframe">
-            {#            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d10784.188505644011!2d19.053119335158936!3d47.48899529453826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1543907528304"#}
-            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d10809.921278244246!2d59.46913981904496!3d36.341182924234126!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1734276117420!5m2!1sen!2s"
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d51438.532585493274!2d59.52100528691403!3d36.3145308368706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sde!2sde!4v1739159647240!5m2!1sde!2sde"
                     class="map-style"></iframe>
         </div>
     </div>
