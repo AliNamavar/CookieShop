@@ -31,7 +31,8 @@
                 <div class="row">
                     <div class="col-lg-7 col-md-7">
                         <div class="shop__option__search">
-                            <form method="get" action="">
+                            <form method="get" action="" id="cate-serch-page">
+                                <input type="hidden" value="" name="page" id="input-page-fill">
                                 <select name="category" onchange="this.form.submit()">
                                     <option value="">Categories</option>
                                     {% for category in categorise %}
@@ -54,40 +55,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                {% if products %}
-
-                    {% for product in products %}
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ product.image.url }}">
-                                    <div class="product__label">
-                                        <span>{{ product.title }}</span>
-                                    </div>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">{{ product.short_description }}</a></h6>
-                                    <div class="product__item__price">${{ product.price }}</div>
-                                    <div class="cart_add">
-                                        <a href="#">Add to cart</a>&nbsp;
-                                        <a href="{% url 'product-detail' slug=product.slug %}">See Detail</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
 
-                    {% endfor %}
-                {% else %}
-                    <div class="col-12 text-center">
-                        <p class="no-products-message">No products found matching your search.</p>
-                    </div>
-                {% endif %}
-                <div class="row">
-                </div>
-
-
-            </div>
+            {% include 'products_includes/product_include.html' %}
 
 
             <div class="shop__last__option">
@@ -110,9 +80,6 @@
 
                         </div>
                     </div>
-                    <form method="get" action="#" id="form-fill-page">
-                        <input type="hidden" value="" name="page" id="input-page-fill">
-                    </form>
 
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="shop__last__text">
