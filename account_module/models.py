@@ -14,8 +14,8 @@ class User(AbstractUser):
     about_user = models.TextField(verbose_name='درباره کاربر', null=True, blank=True)
     address = models.CharField(max_length=250, verbose_name='آدرس کاربر')
 
-    USERNAME_FIELD = 'email'  # شناسه ورود ایمیل
-    REQUIRED_FIELDS = ['username']  # نام کاربری فیلد ضروری
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return self.email

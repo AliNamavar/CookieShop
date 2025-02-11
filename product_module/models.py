@@ -16,7 +16,8 @@ class productCategory(models.Model):
     url = models.CharField(max_length=100, verbose_name='عنوان در url', db_index=True)
     is_active = models.BooleanField(default=False, verbose_name='فعال')
     is_deleted = models.BooleanField(default=False, verbose_name='حذف')
-    icon = models.CharField(max_length=50, choices=ICON_CHOICES, default='flaticon-006-macarons', verbose_name='آیکون', null=True, blank=True)
+    icon = models.CharField(max_length=50, choices=ICON_CHOICES, default='flaticon-006-macarons', verbose_name='آیکون',
+                            null=True, blank=True)
 
     def __str__(self):
         return f'{self.title} - {self.url}'
@@ -39,8 +40,8 @@ class Product(models.Model):
                             allow_unicode=True, verbose_name='slug')
     is_deleted = models.BooleanField(default=False, verbose_name='حذف')
     number = models.IntegerField(verbose_name='حداقل مقدار خرید', default=1, blank=True, null=True)
-    # created_date = models.DateTimeField(null=True)
 
+    # created_date = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.url_title)
@@ -59,13 +60,13 @@ class ProductVisit(models.Model):
     ip = models.CharField(max_length=30, verbose_name='ip  کاربر')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name='کاربر')
 
-
     def __str__(self):
         return f'{self.product.title} - {self.ip}'
 
     class Meta:
         verbose_name = 'product_visit'
         verbose_name_plural = 'product_visits'
+
 
 class Product_Gallery(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
