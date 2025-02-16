@@ -275,7 +275,7 @@ $(document).ready(function () {
 
         event.preventDefault();
 
-        
+
         var address = $('#id_address_address_check').val();
 
 
