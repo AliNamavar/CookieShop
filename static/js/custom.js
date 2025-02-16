@@ -272,20 +272,18 @@ function removeProductFavorite(ProductId) {
 
 $(document).ready(function () {
     $('#addressForm').on('submit', function (event) {
-        // جلوگیری از رفتار پیش‌فرض فرم
+
         event.preventDefault();
 
-        // گرفتن URL از data-attribute فرم
 
-        // گرفتن مقدار آدرس از فیلد
         var address = $('#id_address_address_check').val();
 
-        // ارسال درخواست AJAX
+
         $.ajax({
-            url: '/check-address/', // URL ویو که در data-url فرم قرار داده شده
+            url: '/check-address/',
             type: "POST",
             headers: {
-                "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value // گرفتن CSRF Token از فرم
+                "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
             },
             data: {
                 address: address

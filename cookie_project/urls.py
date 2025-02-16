@@ -19,7 +19,6 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home_module.urls')),
@@ -29,5 +28,7 @@ urlpatterns = [
     path('', include('article_module.urls')),
     path('', include('order_module.urls')),
     path('', include('favorite_module.urls')),
+    # path('api-auth/', include('rest_framework.urls')),
+    path('api/', include('api.urls'))
 ]
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

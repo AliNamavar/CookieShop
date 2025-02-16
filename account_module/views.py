@@ -144,37 +144,6 @@ class LoginView(View):
             'form': form
         })
 
-# class ForgotPassView(View):
-#     def get(self, request):
-#         context = {
-#             'form': ForgotPasswordForm()
-#         }
-#         return render(request, 'account_module/forgotPass.html', context)
-#
-#     def post(self, request):
-#         form = ForgotPasswordForm(request.POST)
-#         if form.is_valid():
-#             email = form.cleaned_data['email']
-#             user:User = User.objects.filter(email__iexact=email).first()
-#             if user is None:
-#                 form.add_error('email', 'ایمیل وارد شده صحیح نمی باشد')
-#                 return render(request, 'account_module/forgotPass.html', context={
-#                     'form': form
-#                 })
-#             send_email(
-#                 to=email,
-#                 subject='Reset your password',
-#                 context={'form': form,'user': user},
-#                 template_name='send_mails/forgot_password_send.html'
-#
-#             )
-#
-#             messages.success(request, 'کد تایید به ایمل شما ارسال شد ایمیل خود را چک کنید')
-#             return redirect(reverse('home'))
-#
-#         return render(request, 'account_module/forgotPass.html', context={
-#             'form': form,
-#         })
 
 class ForgotPassView(SuccessMessageMixin, FormView):
     template_name = 'account_module/forgotPass.html'

@@ -18,7 +18,7 @@ from django.db.models import Q
 class ProductListView(ListView):
     template_name = 'product_module/product_list.html'
     model = Product
-    paginate_by = 1
+    paginate_by = 3
     context_object_name = 'products'
 
     def get_queryset(self):
@@ -39,7 +39,6 @@ class ProductListView(ListView):
         context = super(ProductListView, self).get_context_data(**kwargs)
         context['categorise'] = productCategory.objects.filter(is_active=True).all()
         context['search_query'] = self.request.GET.get('search', '')
-        context['product_count'] = Product.objects.all().count()
 
         return context
 
