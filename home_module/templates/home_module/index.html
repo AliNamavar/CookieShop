@@ -116,7 +116,7 @@
                                 <h6><a href="#">{{ product.short_description }}</a></h6>
                                 <div class="product__item__price">${{ product.price }}</div>
                                 <div class="cart_add">
-                                    <a href="#">Add to cart</a>&nbsp;
+                                    <a onclick="addProductToCart({{ product.id }})">Add to cart</a>&nbsp;
                                     <a href="{% url 'product-detail' slug=product.slug %}">See Detail</a>
                                 </div>
                             </div>
