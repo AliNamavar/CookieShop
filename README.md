@@ -36,6 +36,10 @@ Here are some snapshots of the project to give you a better idea of its features
 ![Shopping Cart](/static/img/github_images/cart.png "Shopping Cart")
 > An Ajax-powered cart for a seamless shopping experience.
 
+### Swagger Page
+![Shopping Cart](/static/img/github_images/swagger.png "Shopping Cart")
+> An interactive API documentation that allows developers to explore and test the API endpoints.
+
 ---
 
 ## How to Run
