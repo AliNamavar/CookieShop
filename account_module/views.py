@@ -119,7 +119,7 @@ class LoginView(View):
                 if user.is_active:
                     is_password_correct = user.check_password(user_password)
                     if is_password_correct:
-                        login(request, user)
+                        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                         messages.success(request, 'لاگ این با موفقیت انجام شد')
                         return redirect(reverse('home'))
                     else:

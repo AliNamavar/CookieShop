@@ -1,4 +1,5 @@
 {% extends 'shared/layout.html' %}
+{% load socialaccount %}
 
 {% block title %}
     login
@@ -11,14 +12,6 @@
                 {{ message }}
             {% endfor %}
         </div>
-        {#        <script>#}
-        {#            setTimeout(function () {#}
-        {#                var messageBox = document.getElementById('message-box');#}
-        {#                if (messageBox) {#}
-        {#                    messageBox.style.display = 'none';#}
-        {#                }#}
-        {#            }, 3000);#}
-        {#        </script>#}
     {% endif %}
     <section class="checkout spad">
         <div class="container">
@@ -45,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="social-login">
-                                <a href="" class="google-login">
+                                <a href="{% provider_login_url 'google' %}" class="google-login">
                                     <i class="fa fa-google"></i> ورود با گوگل
                                 </a>
                             </div>

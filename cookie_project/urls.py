@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('order_module.urls')),
     path('', include('favorite_module.urls')),
     # path('api-auth/', include('rest_framework.urls')),
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
