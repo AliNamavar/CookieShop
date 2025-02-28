@@ -113,33 +113,6 @@ def footer_component(request):
     return render(request, 'shared/footer_component.html', context)
 
 
-# class check_address(View):
-#     def get(self, request, *args, **kwargs):
-#         user = request.user
-#         context = {
-#             'user': user
-#         }
-#         return render(request, 'home_module/adrees_check.html', context)
-#
-#     def post(self, request, *args, **kwargs):
-#         new_address = request.POST.get('address')
-#         user_id = request.user.id
-#         user = User.objects.filter(id=user_id).first()
-#         user.address = new_address
-#         user.save()
-#         context = {
-#             'user': user
-#         }
-#         return JsonResponse({
-#             'status': 'success',
-#             'text': 'all right just wait for site complete paying!',
-#             'icon': 'success',
-#             'confirmButtonTextBack': 'Ok'
-#             # 'body': render_to_string('partials/check_address_partials.html', context)
-#         })
-
-
-# @method_decorator(csrf_exempt, name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class CheckAddressView(View):
     def get(self, request, *args, **kwargs):

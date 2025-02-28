@@ -50,8 +50,7 @@ INSTALLED_APPS = [
     'favorite_module',
     'rest_framework',
     'drf_spectacular',
-    'rest_framework_simplejwt',
-    'api'
+    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
@@ -137,8 +136,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
