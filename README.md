@@ -36,6 +36,10 @@ Here are some snapshots of the project to give you a better idea of its features
 ![Shopping Cart](/static/img/github_images/cart.png "Shopping Cart")
 > An Ajax-powered cart for a seamless shopping experience.
 
+### LogIn Page
+
+![Shopping Cart](/static/img/github_images/login.png "Shopping Cart")
+> A simple and user-friendly login page for quick and secure access to your account.
 ---
 
 ## How to Run

@@ -1,4 +1,5 @@
 {% extends 'shared/layout.html' %}
+{% load socialaccount %}
 
 {% block title %}
     Register Account
@@ -23,11 +24,11 @@
             </div>
         </div>
     </div>
-    
-        <section class="checkout spad">
+
+    <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <form method="post" action="{% url  'register'%}">
+                <form method="post" action="{% url  'register' %}">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -69,6 +70,9 @@
                                 {{ form.email }}
                                 {{ form.email.errors }}
                             </div>
+                            <a href="{% provider_login_url 'google' %}" class="google-login">
+                                <i class="fa fa-google"></i> ورود با گوگل
+                            </a>
                             <p>Already Have Account? <a href="{% url 'login' %}" class="custom-link">Login!</a></p>
                             <button type="submit" class="site-btn">Create</button>
                         </div>

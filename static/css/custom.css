@@ -488,3 +488,108 @@
 }
 
 
+.social-login {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.social-login a.google-login {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #444;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.social-login a.google-login:hover {
+    background-color: #f7f7f7;
+    border-color: #ccc;
+}
+
+.social-login a.google-login i.fa-google {
+    margin-right: 8px;
+    color: #de4b39; /* رنگ لوگوی گوگل */
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.auth-message {
+    font-size: 14px;
+    color: #666;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-fields input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.google-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 750px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #757575;
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.google-login:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.google-login i {
+    font-size: 18px;
+    color: #db4437;
+}
+
