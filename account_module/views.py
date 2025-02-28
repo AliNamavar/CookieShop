@@ -83,7 +83,7 @@ class email_verification(View):
                 user.is_active = True
                 user.email_active_code = get_random_string(8)
                 user.save()
-                login(request, user)
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                 messages.success(request, 'اکانت شما فعال شد')
                 return redirect(reverse('home'))
             else:

@@ -37,11 +37,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="social-login">
-                                <a href="{% provider_login_url 'google' %}" class="google-login">
-                                    <i class="fa fa-google"></i> ورود با گوگل
-                                </a>
-                            </div>
+                            <a href="{% provider_login_url 'google' %}" class="google-login">
+                                <i class="fa fa-google"></i> ورود با گوگل
+                            </a>
+
 
                             <p>Don't have an account? <a href="{% url 'register' %}" class="custom-link">Create!</a></p>
                             <p>Forgot Password? <a href="{% url 'ForgotPassword' %}" class="custom-link">Forgot!</a></p>
