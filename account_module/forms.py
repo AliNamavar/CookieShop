@@ -27,8 +27,22 @@ class RegisterForm(forms.Form):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         repeat_password = cleaned_data.get("repeat_password")
+
+        if len(password) < 8:
+            self.add_error('email', "رمز عبور باید حداقل ۸ کاراکتر باشد")
+
+        if not any(char.isdigit() for char in password):
+            self.add_error('email', "رمز عبور باید شامل حداقل یک عدد باشد")
+
+        if not any(char.isupper() for char in password):
+            self.add_error('email', "رمز عبور باید شامل حداقل یک حرف بزرگ باشد")
+
+        if not any(char in "!@#$%^&*()_+" for char in password):
+            self.add_error('email', "رمز عبور باید شامل حداقل یک کاراکتر ویژه (!@#$%^&*()_+) باشد")
+
         if password != repeat_password:
-             self.add_error('email', "Passwords don't match")
+             self.add_error('email', "رمز عبور و تکرار آن مطابقت ندارند")
+
 
         return cleaned_data
 
