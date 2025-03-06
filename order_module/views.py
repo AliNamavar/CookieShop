@@ -142,10 +142,6 @@ def cart_view(request):
         is_paid=False,
         user=request.user)
 
-    # current_order, created = Order.objects.prefetch_related(Prefetch(
-    #     'orderdetail_set',
-    #     queryset=OrderDetail.objects.order_by('id')
-    # )).get_or_create(is_paid=False, user=request.user)
     total_price = current_order.calculate_total()
 
     context = {
@@ -171,8 +167,10 @@ def remove_order_detail(request):
             'status': 'product_not_found',
         })
 
-    current_order, created = Order.objects.prefetch_related('orderdetail_set').get_or_create(is_paid=False,
-                                                                                             user=request.user)
+    current_order, created = Order.objects.prefetch_related(
+        Prefetch('orderdetail_set', queryset=OrderDetail.objects.filter(product__is_active=True))).get_or_create(
+        is_paid=False,
+        user=request.user)
 
     total_price = current_order.calculate_total()
 
@@ -201,9 +199,8 @@ def update_cart_product_count(request):
 
         })
 
-    current_order, created = Order.objects.get_or_create(is_paid=False, user=request.user)
     detail = OrderDetail.objects.filter(pk=product_id, order__user_id=request.user.id,
-                                        order__is_paid=False).first()
+                                        order__is_paid=False, product__is_active=True).first()
 
     if detail is None:
         return JsonResponse({
@@ -219,6 +216,11 @@ def update_cart_product_count(request):
 
     detail.count = count
     detail.save()
+
+    current_order = Order.objects.prefetch_related(
+        Prefetch('orderdetail_set', queryset=OrderDetail.objects.filter(
+            product__is_active=True))).get_or_create(
+        user=request.user, is_paid=False)[0]
 
     context = {
         'order': current_order,
