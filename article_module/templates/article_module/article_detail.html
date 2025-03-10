@@ -74,46 +74,9 @@
                                 <p class="article-description">{{ article.author.about_user }}</p>
                             </div>
                         </div>
+                    
 
-                        <div id="comments-section">
-                            <div class="blog__details__comment">
-                                <h5>{{ comment_count }} Comment</h5>
-                                {% if request.user.is_authenticated %}
-                                    <a onclick="scrollToForm(event)" href="#" class="primary-btn">Leave a comment</a>
-                                {% endif %}
-                                {% for comment in comments %}
-                                    <div class="blog__details__comment__item">
-
-                                        <div class="blog__details__comment__item__pic">
-                                            {% if comment.user.avatar %}
-                                                <img src="{{ comment.user.avatar.url }}" alt="">
-                                            {% endif %}
-                                        </div>
-                                        <div class="blog__details__comment__item__text">
-                                            <h6>{{ comment.user.username }}</h6>
-                                            <span>{{ comment.created_date }}</span>
-                                            <p>{{ comment.comment }}</p>
-                                            <div class="blog__details__comment__btns">
-                                                <a onclick="fillpatternid({{ comment.id }}, event)"
-                                                   href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% if comment.article_comments_set.all %}
-                                        {% for sub_com in comment.article_comments_set.all %}
-                                            <div class="blog__details__comment__item blog__details__comment__item--reply">
-                                                <div class="blog__details__comment__item__text">
-                                                    <h6>{{ sub_com.user.username }}</h6>
-                                                    <span>{{ sub_com.created_date }}</span>
-                                                    <p>{{ sub_com.comment }}</p>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endfor %}
-
-                            </div>
-                        </div>
+                        {% include 'article_partials/article_success.html' %}
 
                         <hr>
                         <br>
